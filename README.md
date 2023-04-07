@@ -2,7 +2,7 @@
 
 Console Game Engine that works in console window.
 
-The goals of this project.
+The goals of this project:
 1) Сreate RayTracer 
 2) Сreate 2D renderer
 3) Implement 2D physics in this engine.
