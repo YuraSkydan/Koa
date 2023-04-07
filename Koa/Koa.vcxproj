@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{9c32391d-dd4f-417a-9fef-d8613d4793a5}</ProjectGuid>
+    <RootNamespace>Koa</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>DLL_BUILD;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\skida\source\repos\Koa\Koa\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\skida\source\repos\Koa\Koa\Libraries\lib\Box2D\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>box2d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\skida\source\repos\Koa\Koa\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\skida\source\repos\Koa\Koa\Libraries\lib\Box2D\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>box2d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Core\Keys.h" />
+    <ClInclude Include="src\Core\MouseButtons.h" />
+    <ClInclude Include="src\Metal.h" />
+    <ClInclude Include="src\Lambertian.h" />
+    <ClInclude Include="src\Material.h" />
+    <ClInclude Include="src\Renderer.h" />
+    <ClInclude Include="src\Components\Renderers\SpriteRenderer.h" />
+    <ClInclude Include="src\Math\Math.h" />
+    <ClInclude Include="src\Math\MatrixTransform.h" />
+    <ClInclude Include="src\Math\VectorOperations.h" />
+    <ClInclude Include="src\Physics\Physics.h" />
+    <ClInclude Include="src\Sandbox\RenderingExample.h" />
+    <ClInclude Include="src\Components\Component.h" />
+    <ClInclude Include="src\Components\Physics\BoxCollider.h" />
+    <ClInclude Include="src\Components\Camera.h" />
+    <ClInclude Include="src\Components\Physics\CircleCollider.h" />
+    <ClInclude Include="src\Components\Renderers\CircleRenderer.h" />
+    <ClInclude Include="src\Components\Physics\Collider.h" />
+    <ClInclude Include="src\Components\Physics\Collision.h" />
+    <ClInclude Include="src\Components\Grid.h" />
+    <ClInclude Include="src\Components\Renderers\LineRenderer.h" />
+    <ClInclude Include="src\Components\Physics\Material.h" />
+    <ClInclude Include="src\Components\Renderers\PixelRenderer.h" />
+    <ClInclude Include="src\Components\Physics\PolygonCollider.h" />
+    <ClInclude Include="src\Components\Renderers\RendererComponent.h" />
+    <ClInclude Include="src\Components\Physics\Rigidbody.h" />
+    <ClInclude Include="src\Components\Transform.h" />
+    <ClInclude Include="src\Components\Physics\Trigger.h" />
+    <ClInclude Include="src\Core\Core.h" />
+    <ClInclude Include="src\Core\Defines.h" />
+    <ClInclude Include="src\Core\Engine.h" />
+    <ClInclude Include="src\Core\Input.h" />
+    <ClInclude Include="src\Core\Layer.h" />
+    <ClInclude Include="src\Core\LayerStack.h" />
+    <ClInclude Include="src\Core\Time.h" />
+    <ClInclude Include="src\HitRecord.h" />
+    <ClInclude Include="src\Math\Matrix.h" />
+    <ClInclude Include="src\Math\Vector2.h" />
+    <ClInclude Include="src\Math\Vector3.h" />
+    <ClInclude Include="src\Ray.h" />
+    <ClInclude Include="src\Sandbox\PhysicsExample.h" />
+    <ClInclude Include="src\Sandbox\RaytracerExample.h" />
+    <ClInclude Include="src\Scene\Entity.h" />
+    <ClInclude Include="src\Scene\Scene.h" />
+    <ClInclude Include="src\Sphere.h" />
+    <ClInclude Include="src\Window\Color.h" />
+    <ClInclude Include="src\Window\Pixel.h" />
+    <ClInclude Include="src\Window\Window.h" />
+    <ClInclude Include="vendor\box2d\b2_api.h" />
+    <ClInclude Include="vendor\box2d\b2_block_allocator.h" />
+    <ClInclude Include="vendor\box2d\b2_body.h" />
+    <ClInclude Include="vendor\box2d\b2_broad_phase.h" />
+    <ClInclude Include="vendor\box2d\b2_chain_shape.h" />
+    <ClInclude Include="vendor\box2d\b2_circle_shape.h" />
+    <ClInclude Include="vendor\box2d\b2_collision.h" />
+    <ClInclude Include="vendor\box2d\b2_common.h" />
+    <ClInclude Include="vendor\box2d\b2_contact.h" />
+    <ClInclude Include="vendor\box2d\b2_contact_manager.h" />
+    <ClInclude Include="vendor\box2d\b2_distance.h" />
+    <ClInclude Include="vendor\box2d\b2_distance_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_draw.h" />
+    <ClInclude Include="vendor\box2d\b2_dynamic_tree.h" />
+    <ClInclude Include="vendor\box2d\b2_edge_shape.h" />
+    <ClInclude Include="vendor\box2d\b2_fixture.h" />
+    <ClInclude Include="vendor\box2d\b2_friction_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_gear_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_growable_stack.h" />
+    <ClInclude Include="vendor\box2d\b2_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_math.h" />
+    <ClInclude Include="vendor\box2d\b2_motor_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_mouse_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_polygon_shape.h" />
+    <ClInclude Include="vendor\box2d\b2_prismatic_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_pulley_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_revolute_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_rope.h" />
+    <ClInclude Include="vendor\box2d\b2_settings.h" />
+    <ClInclude Include="vendor\box2d\b2_shape.h" />
+    <ClInclude Include="vendor\box2d\b2_stack_allocator.h" />
+    <ClInclude Include="vendor\box2d\b2_timer.h" />
+    <ClInclude Include="vendor\box2d\b2_time_of_impact.h" />
+    <ClInclude Include="vendor\box2d\b2_time_step.h" />
+    <ClInclude Include="vendor\box2d\b2_types.h" />
+    <ClInclude Include="vendor\box2d\b2_weld_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_wheel_joint.h" />
+    <ClInclude Include="vendor\box2d\b2_world.h" />
+    <ClInclude Include="vendor\box2d\b2_world_callbacks.h" />
+    <ClInclude Include="vendor\box2d\box2d.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Metal.cpp" />
+    <ClCompile Include="src\Lambertian.cpp" />
+    <ClCompile Include="src\Renderer.cpp" />
+    <ClCompile Include="src\Components\Renderers\SpriteRenderer.cpp" />
+    <ClCompile Include="src\HitRecord.cpp" />
+    <ClCompile Include="src\Math\Math.cpp" />
+    <ClCompile Include="src\Math\VectorOperations.cpp" />
+    <ClCompile Include="src\Physics\Physics.cpp" />
+    <ClCompile Include="src\Sandbox\RenderingExample.cpp" />
+    <ClCompile Include="src\Components\Component.cpp" />
+    <ClCompile Include="src\Components\Physics\BoxCollider.cpp" />
+    <ClCompile Include="src\Components\Camera.cpp" />
+    <ClCompile Include="src\Components\Physics\CircleCollider.cpp" />
+    <ClCompile Include="src\Components\Renderers\CircleRenderer.cpp" />
+    <ClCompile Include="src\Components\Physics\Collider.cpp" />
+    <ClCompile Include="src\Components\Physics\Collision.cpp" />
+    <ClCompile Include="src\Components\Grid.cpp" />
+    <ClCompile Include="src\Components\Renderers\LineRenderer.cpp" />
+    <ClCompile Include="src\Components\Renderers\PixelRenderer.cpp" />
+    <ClCompile Include="src\Components\Physics\PolygonCollider.cpp" />
+    <ClCompile Include="src\Components\Renderers\RendererComponent.cpp" />
+    <ClCompile Include="src\Components\Physics\Rigidbody.cpp" />
+    <ClCompile Include="src\Components\Transform.cpp" />
+    <ClCompile Include="src\Components\Physics\Trigger.cpp" />
+    <ClCompile Include="src\Core\Engine.cpp" />
+    <ClCompile Include="src\Core\Input.cpp" />
+    <ClCompile Include="src\Core\Layer.cpp" />
+    <ClCompile Include="src\Core\LayerStack.cpp" />
+    <ClCompile Include="src\Core\Time.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Ray.cpp" />
+    <ClCompile Include="src\Sandbox\PhysicsExample.cpp" />
+    <ClCompile Include="src\Sandbox\RaytracerExample.cpp" />
+    <ClCompile Include="src\Scene\Entity.cpp" />
+    <ClCompile Include="src\Scene\Scene.cpp" />
+    <ClCompile Include="src\Sphere.cpp" />
+    <ClCompile Include="src\Window\Color.cpp" />
+    <ClCompile Include="src\Window\Window.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,5 @@
+#pragma once
+
+#define MULTITHREADED_X_DRAW 0
+#define MULTITHREADED_Y_DRAW 0
+#define CUSTOM_CONSOLE_BUFFER 0
