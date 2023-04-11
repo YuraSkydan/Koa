@@ -11,7 +11,7 @@ void Rigidbody::Awake()
 	b2BodyDef bodyDef;
 	Vector3f position = GetTransform()->GetPosition();
 	bodyDef.position = { position.x, position.y };
-	bodyDef.angle = ToRads(-GetTransform()->GetEulerAngles().z);
+	bodyDef.angle = ToRadians(-GetTransform()->GetEulerAngles().z);
 
 	bodyDef.type = b2BodyType(m_Type);
 	bodyDef.gravityScale = m_GravityScale;
@@ -19,7 +19,7 @@ void Rigidbody::Awake()
 	bodyDef.linearDamping = m_LinearDrag;
 	bodyDef.angularDamping = m_AngularDrag;
 
-	m_Body = Physics::CreateBody(bodyDef);	
+	m_Body = PhysicsWorld::CreateBody(bodyDef);
 }
 
 void Rigidbody::Update()

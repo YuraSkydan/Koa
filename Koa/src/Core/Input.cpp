@@ -19,3 +19,11 @@ bool Input::IsMouseButtonReleased(MouseButton button)
 {
 	return GetAsyncKeyState(static_cast<int>(button)) == 0;
 }
+
+Vector2f Input::GetMousePosition()
+{
+	POINT position;
+	GetCursorPos(&position);
+
+	return Vector2f(position.x, position.y);
+}

@@ -5,7 +5,7 @@
 #include "Trigger.h"
 #include "Material.h"
 
-class KOA Collider : public Collision, public Trigger
+class KOA_API Collider : public Collision, public Trigger
 {
 protected:
 	b2Body* m_Body = nullptr;

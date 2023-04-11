@@ -2,7 +2,7 @@
 #include "Collider.h"
 #include "box2d/b2_polygon_shape.h"
 
-class KOA BoxCollider : public Collider
+class KOA_API BoxCollider : public Collider
 {
 private:
 	b2PolygonShape m_Shape;

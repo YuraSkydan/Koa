@@ -1,27 +1,32 @@
 #include "Physics.h"
 #include "../Core/Time.h"
 
-void Physics::CreateWorld()
+void PhysicsWorld::CreateWorld()
 {
-	s_World = std::make_unique<b2World>(s_Gravity);
+	s_PhysicsWorld = std::make_unique<b2World>(s_Gravity);
 }
 
-void Physics::Update()
+void PhysicsWorld::UpdateWorld()
 {
-	s_World->Step(Time::FixedDeltaTime(), s_VelocityIterations, s_PositionIterations);
+	s_PhysicsWorld->Step(Time::FixedDeltaTime(), s_VelocityIterations, s_PositionIterations);
 }
 
-void Physics::DestoryWorld()
+void PhysicsWorld::DestoryWorld()
 {
-	s_World.reset();
+	s_PhysicsWorld.reset();
 }
 
-b2Body* Physics::CreateBody(const b2BodyDef& bodyDef)
+b2Body* PhysicsWorld::CreateBody(const b2BodyDef& bodyDef)
 {
-	return s_World->CreateBody(&bodyDef);
+	return s_PhysicsWorld->CreateBody(&bodyDef);
 }
 
-void Physics::SetGravity(const Vector2f& gravity)
+b2World* PhysicsWorld::GetNativeWorld()
+{
+	return s_PhysicsWorld.get(); 
+}
+
+void PhysicsWorld::SetGravity(const Vector2f& gravity)
 {
 	s_Gravity.x = gravity.x;
 	s_Gravity.y = gravity.y;

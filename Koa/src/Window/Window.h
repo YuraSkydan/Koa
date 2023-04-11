@@ -62,7 +62,10 @@ public:
 	void DrawLine(float x0, float y0, float x1, float y1, Color color);
 	void DrawLine(const Vector2f& v0, const Vector2f& v1, Color color);
 
-	void DrawVerticies(const std::vector<Vector2f>& verticies, Color color);
+	void DrawTriangle(Vector2i verticies[3], Color color);
+	void DrawTriangle(std::vector<Vector2i> verticies, Color color);
+
+	void DrawVerticies(std::vector<Vector2f> verticies, Color color);
 	void DrawVerticies(const std::vector<Vector3f>& verticies, Color color);
 
 	void DrawCircle(int x, int y, int radius, Color color);

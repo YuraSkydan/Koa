@@ -148,15 +148,15 @@ void RaytracerExample::OnUpdate()
 		}
 	}
 
-	if (Input::IsKeyPressed(Key::Right))
+	//if (Input::IsKeyPressed(Key::Right))
 	{
 		//m_PlayerPosition.x += Time::DeltaTime() * 5;
-		cameraAngle += Time::DeltaTime();
+		cameraAngle = Input::GetMousePosition().x;
 	}
 	if (Input::IsKeyPressed(Key::Left))
 	{
 		//m_PlayerPosition.x -= Time::DeltaTime() * 5;
-		cameraAngle -= Time::DeltaTime();
+		cameraAngle = Time::DeltaTime();
 	}
 	if (Input::IsKeyPressed(Key::Up))
 	{

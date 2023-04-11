@@ -4,7 +4,7 @@
 
 class b2CircleShape;
 
-class KOA CircleCollider : public Collider
+class KOA_API CircleCollider : public Collider
 {
 private:
 	b2CircleShape m_Shape;

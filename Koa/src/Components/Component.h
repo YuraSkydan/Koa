@@ -4,7 +4,7 @@
 class Entity;
 class Transform;
 
-class KOA Component
+class KOA_API Component
 {
 protected:
 	bool m_IsEnabled = true;

@@ -1,6 +1,6 @@
 #pragma once
 #ifdef DLL_BUILD
-#define KOA  //__declspec(dllexport)
+#define KOA_API  //__declspec(dllexport)
 #else
-#define KOA  //__declspec(dllimport)
+#define KOA_API  //__declspec(dllimport)
 #endif

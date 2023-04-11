@@ -4,10 +4,10 @@
 #include "../Core/Core.h"
 #include "../Math/Vector2.h"
 
-class KOA Physics
+class KOA_API PhysicsWorld
 {
 private:
-	inline static std::unique_ptr<b2World> s_World;
+	inline static std::unique_ptr<b2World> s_PhysicsWorld;
 	inline static b2Vec2 s_Gravity = b2Vec2(0.0f, -10.0f);
 
 	inline static int32 s_VelocityIterations = 6;
@@ -18,11 +18,15 @@ private:
 	friend class Collider;
 private:
 	static void CreateWorld();
-	static void Update();
+	static void UpdateWorld();
 	static void DestoryWorld();
 	static b2Body* CreateBody(const b2BodyDef& bodyDef);
-	static b2World* GetWorld() { return s_World.get(); }
+	static b2World* GetNativeWorld();
 
 public:
 	static void SetGravity(const Vector2f& gravity);
+
+	PhysicsWorld() = delete;
+	PhysicsWorld(const PhysicsWorld& other) = delete;
+	PhysicsWorld& operator=(const PhysicsWorld& other) = delete;
 };

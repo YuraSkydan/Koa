@@ -26,7 +26,7 @@ Vector2<T>& Vector2<T>::operator=(const Vector3<U>& v)
 	x = v.x;
 	y = v.y;
 
-	return this;
+	return *this;
 }
 
 template<typename T>

@@ -16,10 +16,10 @@ Engine::Engine()
 
 	//m_Window->DisableCursor();
 	//m_Window->SetFont(L"LHF Full Block", 1, 1);
-	m_Window->SetFont(L"Consolas", 2, 2);
+	m_Window->SetFont(L"Consolas", 5, 5);
 
-    int windowWidth = 500;
-	int windowHeight = 500;
+    int windowWidth = 200;
+	int windowHeight = 200;
 	
 	m_Window->SetConsoleBufferSize({ short(windowWidth), short(windowHeight) });
 	m_Window->SetConsoleWindowSize({ 0, 0, short(windowWidth - 1), short(windowHeight - 1) });
@@ -36,7 +36,7 @@ void Engine::Run()
 	{
 		Time::FrameStart();
 
-		m_Window->ClearColor(Color::Red);
+		m_Window->ClearColor(Color::Black);
 		m_LayerStack.UpdateLayers();
 		m_Scene->Update();
 		m_Scene->Render();

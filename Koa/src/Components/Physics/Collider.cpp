@@ -12,9 +12,9 @@ Collider::Collider(Entity* entity)
 
 void Collider::Start()
 {
-	if (HasComponent<Rigidbody>())
+	Rigidbody* rigidbody = GetComponent<Rigidbody>();
+	if (rigidbody != nullptr)
 	{
-		Rigidbody* rigidbody = GetComponent<Rigidbody>();
 		m_Body = rigidbody->GetBody();
 	}
 	else
@@ -24,8 +24,8 @@ void Collider::Start()
 		float angle = GetTransform()->GetEulerAngles().z;
 
 		bodyDef.position = { position.x, position.y};
-		bodyDef.angle = ToRads(-angle);
-		m_Body = Physics::CreateBody(bodyDef);
+		bodyDef.angle = ToRadians(-angle);
+		m_Body = PhysicsWorld::CreateBody(bodyDef);
 	}
 
 	SetShape();

@@ -16,7 +16,7 @@ Scene::Scene()
 
 void Scene::Start()
 {
-	Physics::CreateWorld();
+	PhysicsWorld::CreateWorld();
 }
 
 void Scene::Update()
@@ -24,22 +24,24 @@ void Scene::Update()
 	static double duration = 0;
 	duration += Time::DeltaTime();
 
-	std::for_each(m_Entities.begin(), m_Entities.end(),
-		[](std::unique_ptr<Entity>& entity)
+	for (auto& entity : m_Entities)
+	{
+		if (entity->IsActive())
 		{
 			entity->ComponentsUpdate();
-		});
+		}
+	}
 
 	//Fixed Update 
 	if (duration >= Time::FixedDeltaTime())
 	{
-		Physics::Update();
+		PhysicsWorld::UpdateWorld();
 
-		for (auto it = m_Entities.begin(), end = m_Entities.end(); it != end; ++it)
+		for (auto& entity : m_Entities)
 		{
-			if ((*it)->IsActive())
+			if ((entity)->IsActive())
 			{
-				(*it)->ComponentsFixedUpdate();
+				entity->ComponentsFixedUpdate();
 			}
 		}
 
@@ -49,32 +51,38 @@ void Scene::Update()
 
 void Scene::Render()
 {
-	std::vector<Vector2f> squareVerticies =
-	{ { -0.5f, -0.5f },
-	  { -0.5f,  0.5f },
-	  {  0.5f,  0.5f },
-	  {  0.5f, -0.5f } };
+	std::vector<Vector2f> square
+	{
+		{ -0.5f, -0.5f },
+		{ -0.5f,  0.5f },
+		{  0.5f, -0.5f },
+
+		{  0.5f, -0.5f },
+		{  0.5f,  0.5f },
+		{ -0.5f,  0.5f }
+	};
 	//GetComponent of RenderType
 	for (size_t i = 0; i < m_Entities.size(); i++)
 	{
 		if (m_Entities[i]->HasComponent<SpriteRenderer>())
 		{
-			std::vector<Vector3f> verticies;
-			for (size_t i = 0; i < squareVerticies.size(); i++)
+			std::vector<Vector2f> verticies;
+			for (size_t i = 0; i < square.size(); i++)
 			{
-				verticies.push_back(squareVerticies[i]);
+				verticies.push_back(square[i]);
 			}
 
 			SpriteRenderer* spriteRenderer = m_Entities[i]->GetComponent<SpriteRenderer>();
 			Matrix4x4f transformMatrix = m_Entities[i]->GetTransform()->GetTransformMatrix();
 			for (size_t j = 0; j < verticies.size(); j++)
 			{
-				verticies[j] = transformMatrix * verticies[j];
+				verticies[j] = transformMatrix * Vector3f(verticies[j]);
 				verticies[j].x += transformMatrix[0][3];
 				verticies[j].y += transformMatrix[1][3];
 			}
 
-			Engine::Get().GetWindow()->DrawVerticies(verticies, spriteRenderer->GetColor());
+			Engine::Get().GetWindow()->DrawVerticies(std::vector<Vector2f>(verticies.begin(), verticies.begin() + 3), spriteRenderer->GetColor());
+			Engine::Get().GetWindow()->DrawVerticies(std::vector<Vector2f>(verticies.begin() + 3, verticies.end()), spriteRenderer->GetColor());
 		}
 	}
 

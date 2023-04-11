@@ -3,7 +3,7 @@
 //#include "../Scene/LayerMask.h"
 //#include "SpriteRenderer.h"
 
-class KOA Camera : public Component
+class KOA_API Camera : public Component
 {
 private:
 	float m_AspectRation = 0;

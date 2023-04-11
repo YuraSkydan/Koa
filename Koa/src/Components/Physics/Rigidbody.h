@@ -2,10 +2,10 @@
 #include "../Transform.h"
 #include "box2d/b2_body.h"
 
-enum class KOA BodyType { Static = 0, Kinematic, Dynamic };
-enum class KOA ForceMode { Force = 0, Acceleration, Impulse, VelocityChange };
+enum class KOA_API BodyType { Static = 0, Kinematic, Dynamic };
+enum class KOA_API ForceMode { Force = 0, Acceleration, Impulse, VelocityChange };
 
-class KOA Rigidbody : public Component
+class KOA_API Rigidbody : public Component
 {
 private:
 	b2Body* m_Body = nullptr;

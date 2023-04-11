@@ -8,7 +8,7 @@ Lambertian::Lambertian(const Vector3f& albedo)
 
 bool Lambertian::Scatter(const Ray& rIn, const HitRecord& record, Vector3f& attenuation, Ray& scattered) const
 {
-	Vector3f target = record.hitPoint + record.normal /*+ RandomInUnitSphere()*/;
+	Vector3f target = record.hitPoint + record.normal + RandomInUnitSphere();
 	scattered = Ray(record.hitPoint, target - record.hitPoint);
 	attenuation = m_Albedo;
 

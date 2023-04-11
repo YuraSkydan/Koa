@@ -1,4 +1,5 @@
 #include <cstring>
+#include <algorithm>
 
 #include "Window.h"
 #include "../Math/VectorOperations.h"
@@ -289,22 +290,83 @@ void Window::DrawLine(const Vector2f& v0, const Vector2f& v1, Color color)
 	DrawLine(v0.x, v0.y, v1.x, v1.y, color);
 }
 
-void Window::DrawVerticies(const std::vector<Vector2f>& verticies, Color color)
+void Window::DrawTriangle(Vector2i verticies[3], Color color)
 {
-	for (auto it = verticies.begin(), end = verticies.end() - 1; it != end; ++it)
+}
+
+void Window::DrawTriangle(std::vector<Vector2i> verticies, Color color)
+{
+	std::sort(verticies.begin(), verticies.end(),
+		[](const Vector2i& v1, const Vector2i& v2)
+		{
+			return v1.y < v2.y;
+		});
+
+	int totalHeight = verticies[2].y - verticies[0].y;
+	for (int y = verticies[0].y; y <= verticies[1].y; y++)
 	{
-		DrawLine(*it, *(it + 1), color);
+		int segmentHeight = verticies[1].y - verticies[0].y + 1;
+		float alpha = (float)(y - verticies[0].y) / totalHeight;
+		float beta = (float)(y - verticies[0].y) / segmentHeight;
+		Vector2i A = verticies[0] + (verticies[2] - verticies[0]) * alpha;
+		Vector2i B = verticies[0] + (verticies[1] - verticies[0]) * beta;
+	
+		if (A.x > B.x)
+		{
+			std::swap(A, B);
+		}
+
+		for (int j = A.x; j <= B.x; j++)
+		{
+			SetPixel(j, y, color);
+		}
 	}
 
-	DrawLine(*(verticies.rbegin()), *(verticies.begin()), color);
-
-	Vector2f center;
-	for (auto it = verticies.cbegin(), end = verticies.cend(); it != end; ++it)
+	for (int y = verticies[1].y; y <= verticies[2].y; y++)
 	{
-		center += (*it) / 2.0f;
+		int segmentHeight = verticies[2].y - verticies[1].y + 1;
+		float alpha = (float)(y - verticies[0].y) / totalHeight;
+		float beta = (float)(y - verticies[1].y) / segmentHeight;
+		Vector2i A = verticies[0] + (verticies[2] - verticies[0]) * alpha;
+		Vector2i B = verticies[1] + (verticies[2] - verticies[1]) * beta;
+
+		if (A.x > B.x)
+		{
+			std::swap(A, B);
+		}
+
+		for (int j = A.x; j <= B.x; j++)
+		{
+			SetPixel(j, y, color);
+		}
+	}
+}
+
+void Window::DrawVerticies(std::vector<Vector2f> verticies, Color color)
+{
+	//DrawLine(verticies[0], verticies[1], color);
+	//DrawLine(verticies[1], verticies[2], color);
+	//DrawLine(verticies[2], verticies[0], color);
+
+	std::vector<Vector2i> convertedVerticies;
+
+	for (auto& vertex : verticies)
+	{
+		int x = (vertex.x * m_ConsoleBufferSize.X / 2.0f) + m_ConsoleBufferSize.X / 2.0f;
+		int y = (-vertex.y * m_ConsoleBufferSize.Y / 2.0f) + m_ConsoleBufferSize.Y / 2.0f;
+	
+		convertedVerticies.emplace_back(Vector2i(x, y));
 	}
 
-	//Fill(center.x, center.y, color, shade);
+	DrawTriangle(convertedVerticies, color);
+	
+	//Vector2f center;
+	//for (auto& vertex : verticies)
+	//{
+	//	center += vertex / 2.0f;
+	//}
+
+	//Fill(center.x, center.y, color);
 }
 
 void Window::DrawVerticies(const std::vector<Vector3f>& verticies, Color color)

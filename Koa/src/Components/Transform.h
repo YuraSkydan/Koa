@@ -3,9 +3,9 @@
 #include "Component.h"
 #include "../Math/MatrixTransform.h"
 
-enum class KOA Space { Self, World };
+enum class KOA_API Space { Self, World };
 
-class KOA Transform : public Component
+class KOA_API Transform : public Component
 {
 private:
 	Vector3f m_Position;

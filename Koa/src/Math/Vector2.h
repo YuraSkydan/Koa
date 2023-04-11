@@ -96,7 +96,7 @@ inline Vector2<T>& Vector2<T>::operator=(const Vector2<U>& v)
 	x = v.x;
 	y = v.y;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -116,7 +116,7 @@ inline Vector2<T>& Vector2<T>::operator-=(const Vector2<U>& v)
 	x -= v.x;
 	y -= v.y;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -126,7 +126,7 @@ inline Vector2<T>& Vector2<T>::operator*=(const Vector2<U>& v)
 	x *= v.x;
 	y *= v.y;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -136,7 +136,7 @@ inline Vector2<T>& Vector2<T>::operator/=(const Vector2<U>& v)
 	x /= v.x;
 	y /= v.y;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -146,7 +146,7 @@ inline Vector2<T>& Vector2<T>::operator=(U value)
 	x = value;
 	y = value;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -156,7 +156,7 @@ inline Vector2<T>& Vector2<T>::operator+=(U value)
 	x += value;
 	y += value;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -166,7 +166,7 @@ inline Vector2<T>& Vector2<T>::operator-=(U value)
 	x -= value;
 	y -= value;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -176,7 +176,7 @@ inline Vector2<T>& Vector2<T>::operator*=(U scalar)
 	x *= scalar;
 	y *= scalar;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -186,7 +186,7 @@ inline Vector2<T>& Vector2<T>::operator/=(U scalar)
 	x /= scalar;
 	y /= scalar;
 	
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -279,8 +279,8 @@ inline Vector2<T> operator-(const Vector2<T>& v, T value)
 	return Vector2<T>(v.x - value, v.y - value);
 }
 
-template<typename T>
-inline Vector2<T> operator*(const Vector2<T>& v, T scalar)
+template<typename T, typename U>
+inline Vector2<T> operator*(const Vector2<T>& v, U scalar)
 {
 	return Vector2<T>(v.x * scalar, v.y * scalar);
 }
