@@ -10,55 +10,20 @@
 
 class Window
 {
-private:
-	HANDLE m_Console;
-
-#if CUSTOM_CONSOLE_BUFFER
-	HANDLE m_ConsoleBuffer;
-#endif
-
-	HWND m_ConsoleWindow;
-	SMALL_RECT m_ConsoleWindowSize; 
-
-	CONSOLE_SCREEN_BUFFER_INFO m_ConsoleBufferInfo;
-	CONSOLE_CURSOR_INFO m_ConsoleCursor;
-
-	COORD m_ConsoleBufferSize;
-	COORD m_WritePosition;
-
-	LONG m_Style;
-
-	std::vector<CHAR_INFO> m_Buffers[2];
-	size_t m_BufferSize;
-
-	size_t m_CurrentBufferIndex;
-	size_t m_NextBufferIndex;
-
-private:
-	void ResizeBuffers();
-	void DrawPart(const COORD& writePosition, SMALL_RECT windowSize);
-	WCHAR GetShadeCharacter(Color::Shade shade);
+protected:
+	int m_Width;
+	int m_Height;
 
 public: 
-	Window();
-	Window(short width, short height);
+	Window(int width, int height);
 
-	void Update();
+	virtual void Update();
 
-	void Clear();
-	void ClearColor(Color color);
-	void SwapBuffers();
-	void Draw();
-
-	void SetPixel(int x, int y, Color color);
 	void SetPixel(float x, float y, Color color);
+	void SetPixel(const Vector2i& v, Color color);
 	void SetPixel(const Vector2f& v, Color color);
 
-	void Fill(int x, int y, Color color);
-	void Fill(float x, float y, Color color);
-	void Fill(const Vector2f& center, Color color);
-
-	void DrawLine(int x0, int y0, int x1, int y1, Color color);
+    void DrawLine(int x0, int y0, int x1, int y1, Color color);
 	void DrawLine(float x0, float y0, float x1, float y1, Color color);
 	void DrawLine(const Vector2f& v0, const Vector2f& v1, Color color);
 
@@ -71,28 +36,21 @@ public:
 	void DrawCircle(int x, int y, int radius, Color color);
 	void DrawCircle(const Vector2f& position, float radius, Color color);
 
-	void EnableCursor();
-	void DisableCursor();
+	int GetWidth() const;
+	int GetHeight() const;
 
-	void EnableScrollBar();
-	void DisableScrollBar();
+	virtual void Clear() = 0;
+	virtual void ClearColor(Color color) = 0;
+	virtual void Draw() = 0;
 
-	void EnableResize();
-	void DisableResize();
+	virtual void SetPixel(int x, int y, Color color) = 0;
 
-	void SetConsoleWindowSize(const SMALL_RECT& size);
-	void SetConsoleBufferSize(const COORD& size);
-	void SetWritePosition(const COORD& position);
+	virtual Pixel GetPixel(int x, int y) = 0;
+	virtual Pixel GetPixel(float x, float y) = 0;
+	virtual Pixel GetPixel(const Vector2f& v) = 0;
 
-	void SetFont(const wchar_t* fontName, short fontWidth, short fontHeight, unsigned int fontWeight = 0, unsigned int fontFamily = FF_DONTCARE);
-	void SetTitile(const wchar_t* title);
+	virtual void SetTitle(const wchar_t* title) = 0;
+	virtual const wchar_t* GetTitle() const = 0;
 
-	Pixel GetPixel(int x, int y);
-	Pixel GetPixel(float x, float y);
-	Pixel GetPixel(const Vector2f& v);
-
-	const SMALL_RECT& GetConsoleWindowSize() const;
-	const COORD& GetConsoleBufferSize() const;
-	const COORD& GetWritePosition() const;
-	const wchar_t* GetTitle() const;
+	virtual ~Window();
 };

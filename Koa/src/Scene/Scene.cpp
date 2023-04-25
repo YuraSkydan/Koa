@@ -61,6 +61,7 @@ void Scene::Render()
 		{  0.5f,  0.5f },
 		{ -0.5f,  0.5f }
 	};
+
 	//GetComponent of RenderType
 	for (size_t i = 0; i < m_Entities.size(); i++)
 	{

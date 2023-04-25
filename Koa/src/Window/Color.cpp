@@ -82,11 +82,11 @@ std::vector<std::pair<Vector3ui, Color>> Color::s_RGBColors =
 
 
 Color::Color(ColorType colorValue, Shade shade)
-	: m_ColorValue(colorValue), m_Shade(shade)
+	: m_ConsoleColor(colorValue), m_ConsoleColorShade(shade)
 { }
 
 Color::Color(Shade shade)
-	: m_Shade(shade)
+	: m_ConsoleColorShade(shade)
 { }
 
 Color::Color(const Vector3ui& color)
@@ -94,14 +94,17 @@ Color::Color(const Vector3ui& color)
 	SetColorRGB(color);
 }
 
-void Color::SetColorValue(ColorType color)
+void Color::SetConsoleColor(ColorType color)
 {
-	m_ColorValue = color;
+	m_ConsoleColor = color;
 }
 
 void Color::SetColorRGB(const Vector3ui& color)
 {
-	auto closestColor = s_RGBColors.begin();
+	m_RGBColor = color;
+
+
+	/*auto closestColor = s_RGBColors.begin();
 	float closestDistance = FLT_MAX;
 
 	for (auto it = s_RGBColors.begin(), end = s_RGBColors.end(); it != end; ++it)
@@ -118,20 +121,26 @@ void Color::SetColorRGB(const Vector3ui& color)
 		}
 	}
 
-	*this = closestColor->second;
+	m_ConsoleColor = closestColor->second.GetConsoleColor();
+	m_ConsoleColorShade = closestColor->second.GetConsoleColorShade();*/
 }
 
-void Color::SetShade(Shade shade)
+void Color::SetConsoleColorShade(Shade shade)
 {
-	m_Shade = shade;
+	m_ConsoleColorShade = shade;
 }
 
-ColorType Color::GetColorValue() const
+ColorType Color::GetConsoleColor() const
 {
-	return m_ColorValue;
+	return m_ConsoleColor;
 }
 
-Color::Shade Color::GetShade() const
+const Vector3ui& Color::GetRGBColor() const
 {
-	return m_Shade;
+	return m_RGBColor;
+}
+
+Color::Shade Color::GetConsoleColorShade() const
+{
+	return m_ConsoleColorShade;
 }

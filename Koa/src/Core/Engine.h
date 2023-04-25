@@ -4,7 +4,7 @@
 
 #include "Defines.h"
 #include "LayerStack.h"
-#include "../Window/Window.h"
+#include "../Window/ConsoleWindow.h"
 #include "../Scene/Scene.h"
 
 class Engine

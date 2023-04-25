@@ -10,7 +10,7 @@
 #include "../Metal.h"
 #include "../Lambertian.h"
 
-Vector3f RaytracerExample::Color(const Ray& ray, int depth)
+Vector3f RaytracerExample::ColorRaytrace(const Ray& ray, int depth)
 {
 	HitRecord record;
 	bool hitAnything = false;
@@ -33,7 +33,7 @@ Vector3f RaytracerExample::Color(const Ray& ray, int depth)
 		Vector3f attenuation;
 		if (depth < m_MaxDepth && record.materialPtr->Scatter(ray, record, attenuation, scattered))
 		{
-			return attenuation * Color(scattered, depth + 1);
+			return attenuation * ColorRaytrace(scattered, depth + 1);
 		}
 
 		return Vector3f(0, 0, 0);
@@ -115,48 +115,80 @@ RaytracerExample::RaytracerExample()
 	}
 }
 
+void RaytracerExample::RaytracePart(float xStart, float xEnd)
+{
+	Window* window = Engine::Get().GetWindow();
+
+	float xStep = 2.0f / float(1000.0f);
+	float yStep = 2.0f / float(1000.0f);
+
+	Vector3f zAxis = Vector3f(sin(m_CameraAngle), 0.0f, cos(m_CameraAngle));
+	Vector3f xAxis = Cross(Vector3f(0.0f, 1.0f, 0.0f), zAxis);
+
+	for (float x = xStart; x < xEnd; x += xStep)
+	{
+		for (float y = -1.0f; y < 1.0f; y += yStep)
+		{
+			Vector3f direction = x * xAxis + Vector3f(0.0f, y, 0.0f) + zAxis;
+
+			Ray ray(m_PlayerPosition, direction.Normalized());
+			HitRecord record;
+
+			Color color(ColorRaytrace(ray, 0) * 255.0f);
+			window->SetPixel(x, y, color);
+		}
+	}
+}
+
 void RaytracerExample::OnUpdate()
 {
 	Window* window = Engine::Get().GetWindow();
 
-	Color::Shade shade = Color::Shade::None;
+	//double xStep = 2.0f / float(1000.0f);
+	//double yStep = 2.0f / float(1000.0f);
 
-	float xStep = 2.0f / float(window->GetConsoleBufferSize().X);
-	float yStep = 2.0f / float(window->GetConsoleBufferSize().Y);
+	//unsigned int threadsAmount = std::thread::hardware_concurrency();
+	//std::vector<std::thread> threads;
+	//threads.reserve(threadsAmount);
 
-	static float cameraAngle = 0;
+	//for (size_t i = 0; i < threadsAmount; i++)
+	//{
+	//	float xStart = -1.0f + 2.0f / float(threadsAmount) * float(i);
+	//	float xEnd = -1.0f + 2.0f / float(threadsAmount) * float(i + 1);
+	//	threads.push_back(std::thread(&RaytracerExample::RaytracePart, this, xStart, xEnd));
+	//}
+
+	//for (auto& thread : threads)
+	//{
+	//	thread.join();
+	//}
+
+	float xStep = 2.0f / float(1000.0f);
+	float yStep = 2.0f / float(1000.0f);
+
+	Vector3f zAxis = Vector3f(sin(m_CameraAngle), 0.0f, cos(m_CameraAngle));
+	Vector3f xAxis = Cross(Vector3f(0.0f, 1.0f, 0.0f), zAxis);
 
 	for (float x = -1.0f; x < 1.0f; x += xStep)
 	{
-		shade = Color::Shade((x + 1.0f) / 2.0f * int(Color::Shade::Count));
 		for (float y = -1.0f; y < 1.0f; y += yStep)
 		{
-			Vector3ui color((x + 1.0f) * 128.0f, (y + 1.0f) * 128.0f, 0);
-			//Vector3ui color(200, 200, 200);
-			//window->SetPixel(x, y, Color(Color::White, shade));
-			//window->SetPixel(x, y, color);
-			
-			Vector3f zAxis = Vector3f(sin(cameraAngle), 0.0f, cos(cameraAngle));
-			Vector3f xAxis = Cross(Vector3f(0.0f, 1.0f, 0.0f), zAxis);
-			
 			Vector3f direction = x * xAxis + Vector3f(0.0f, y, 0.0f) + zAxis;
+
 			Ray ray(m_PlayerPosition, direction.Normalized());
 			HitRecord record;
 
-			color = Color(ray, 0) * 255.0f;
+			Color color(ColorRaytrace(ray, 0) * 255.0f);
 			window->SetPixel(x, y, color);
 		}
 	}
 
-	//if (Input::IsKeyPressed(Key::Right))
-	{
-		//m_PlayerPosition.x += Time::DeltaTime() * 5;
-		cameraAngle = Input::GetMousePosition().x;
-	}
+	m_CameraAngle = ToRadians(Input::GetMousePosition().x);
+
 	if (Input::IsKeyPressed(Key::Left))
 	{
 		//m_PlayerPosition.x -= Time::DeltaTime() * 5;
-		cameraAngle = Time::DeltaTime();
+		m_CameraAngle = Time::DeltaTime();
 	}
 	if (Input::IsKeyPressed(Key::Up))
 	{

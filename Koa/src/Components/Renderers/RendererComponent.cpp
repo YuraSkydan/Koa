@@ -4,28 +4,17 @@ RendererComponent::RendererComponent(Entity* owner)
     : Component(owner)
 { }
 
-
 void RendererComponent::SetColor(Color color)
 {
     m_Color = color;
 }
 
-void RendererComponent::SetShade(Color::Shade shade)
+void RendererComponent::SetConsoleColorShade(Color::Shade shade)
 {
-    m_Color.SetShade(shade);
+    m_Color.SetConsoleColorShade(shade);
 }
 
-Color& RendererComponent::GetColor()
+const Color& RendererComponent::GetColor() const
 {
     return m_Color;
-}
-
-Color RendererComponent::GetColor() const
-{
-    return m_Color;
-}
-
-Color::Shade RendererComponent::GetShade() const
-{
-    return m_Color.GetShade();
 }

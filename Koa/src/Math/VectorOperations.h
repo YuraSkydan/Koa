@@ -36,21 +36,19 @@ Vector3<T>& Vector3<T>::operator=(const Vector2<U>& v)
 	x = v.x;
 	y = v.y;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
 float Dot(const Vector2<T>& v1, const Vector2<T>& v2)
 {
-	float dot = v1.x * v2.x + v1.y * v2.y;
-	return dot;
+	return v1.x * v2.x + v1.y * v2.y;
 }
 
 template<typename T>
 float Dot(const Vector3<T>& v1, const Vector3<T>& v2)
 {
-	float dot = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
-	return dot;
+	return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 }
 
 template<typename T>

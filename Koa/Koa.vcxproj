@@ -135,6 +135,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Window\ConsoleWindow.h" />
+    <ClInclude Include="src\Window\OpenGLWindow.h" />
     <ClInclude Include="src\Core\Keys.h" />
     <ClInclude Include="src\Core\MouseButtons.h" />
     <ClInclude Include="src\Metal.h" />
@@ -223,8 +225,11 @@
     <ClInclude Include="vendor\box2d\b2_world.h" />
     <ClInclude Include="vendor\box2d\b2_world_callbacks.h" />
     <ClInclude Include="vendor\box2d\box2d.h" />
+    <ClInclude Include="src\Window\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Window\ConsoleWindow.cpp" />
+    <ClCompile Include="src\Window\OpenGLWindow.cpp" />
     <ClCompile Include="src\Metal.cpp" />
     <ClCompile Include="src\Lambertian.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
@@ -263,6 +268,7 @@
     <ClCompile Include="src\Sphere.cpp" />
     <ClCompile Include="src\Window\Color.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
+    <ClCompile Include="src\Window\WindowsWindow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,6 +9,7 @@ class KOA_API Component
 protected:
 	bool m_IsEnabled = true;
 	Entity* m_Owner;
+	Transform* m_Transform;
 
 public:
 	Component(Entity* entity);

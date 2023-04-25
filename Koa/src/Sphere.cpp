@@ -11,11 +11,19 @@ Sphere::Sphere(Entity* owner)
 
 bool Sphere::Hit(const Ray& ray, float tMin, float tMax, HitRecord& record) const
 {
+	const Vector3f& direction = ray.GetDirection();
 	Vector3f oc = ray.GetOrigin() - GetTransform()->GetPosition();
-	Vector3f direction = ray.GetDirection();
-	float a = direction.SquaredMagnitude();
+	
 	float b = Dot(direction, oc);
+
+	if (b > 0)
+	{
+		return false;
+	}
+
+	float a = direction.SquaredMagnitude();
 	float c = oc.SquaredMagnitude() - m_Radius * m_Radius;
+	
 	float discriminant = b * b - a * c;
 
 	if (discriminant < 0)
@@ -25,35 +33,20 @@ bool Sphere::Hit(const Ray& ray, float tMin, float tMax, HitRecord& record) cons
 
 	float sqrtd = sqrt(discriminant);
 
-	float t = 0;
-	float t1 = (-b - sqrtd) / a;
-	float t2 = (-b - sqrtd) / a;
+	float t = (-b - sqrtd) / a;
 
-	if (t1 < tMin || t1 > tMax)
+	if (t < tMin || t > tMax)
 	{
-		if (t2 < tMin || t2 > tMax)
+		t = (-b + sqrtd) / a;
+		if (t < tMin || t > tMax)
 		{
 			return false;
-		}
-
-		t = t2;
-	}
-
-	if (t2 > tMin && t2 < tMax)
-	{
-		if (t2 < t1)
-		{
-			t = t2;
-		}
-		else
-		{
-			t = t1;
 		}
 	}
 
 	record.t = t;
 	record.hitPoint = ray.At(record.t);
-	Vector3f outwardNormal = (record.hitPoint - GetTransform()->GetPosition()) / m_Radius;
+	Vector3f outwardNormal = (record.hitPoint - m_Transform->GetPosition()) / m_Radius;
 	record.SetFaceNormal(ray, outwardNormal);
 	record.materialPtr = m_Material.get();
 

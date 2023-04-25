@@ -3,7 +3,9 @@
 
 Component::Component(Entity* owner)
 	: m_Owner(owner)
-{ }
+{
+	m_Transform = m_Owner->GetTransform();
+}
 
 Entity* Component::GetOwner() const
 {

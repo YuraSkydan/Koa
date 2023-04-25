@@ -11,9 +11,7 @@ public:
 	RendererComponent(Entity* owner);
 
 	void SetColor(Color color);
-	void SetShade(Color::Shade shade);
+	void SetConsoleColorShade(Color::Shade shade);
 
-	Color& GetColor();
-	Color GetColor() const;
-	Color::Shade GetShade() const;
+	const Color& GetColor() const;
 };
