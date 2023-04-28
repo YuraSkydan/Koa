@@ -1,7 +1,7 @@
 #include "Metal.h"
-#include "Math/VectorOperations.h"
 #include "Ray.h"
 #include "HitRecord.h"
+#include "../Math/VectorOperations.h"
 
 Metal::Metal(const Vector3f& albedo)
 	: m_Albedo(albedo)

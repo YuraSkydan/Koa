@@ -208,7 +208,7 @@ inline Vector3<T>& Vector3<T>::operator*=(U value)
 	y *= value;
 	z *= value;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -219,7 +219,7 @@ inline Vector3<T>& Vector3<T>::operator/=(U value)
 	y /= value;
 	z /= value;
 
-	return this;
+	return *this;
 }
 
 template<typename T>

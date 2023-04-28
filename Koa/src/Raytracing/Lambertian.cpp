@@ -1,6 +1,6 @@
 #include "Lambertian.h"
 #include "HitRecord.h"
-#include "Math/VectorOperations.h"
+#include "../Math/VectorOperations.h"
 
 Lambertian::Lambertian(const Vector3f& albedo)
 	: m_Albedo(albedo)

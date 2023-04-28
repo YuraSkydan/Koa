@@ -2,8 +2,8 @@
 
 #include "Sphere.h"
 #include "HitRecord.h"
-#include "Components/Transform.h"
-#include "Math/VectorOperations.h"
+#include "../Components/Transform.h"
+#include "../Math/VectorOperations.h"
 
 Sphere::Sphere(Entity* owner)
 	: Component(owner), m_Radius(1)
@@ -12,7 +12,7 @@ Sphere::Sphere(Entity* owner)
 bool Sphere::Hit(const Ray& ray, float tMin, float tMax, HitRecord& record) const
 {
 	const Vector3f& direction = ray.GetDirection();
-	Vector3f oc = ray.GetOrigin() - GetTransform()->GetPosition();
+	Vector3f oc = ray.GetOrigin() - m_Transform->GetPosition();
 	
 	float b = Dot(direction, oc);
 

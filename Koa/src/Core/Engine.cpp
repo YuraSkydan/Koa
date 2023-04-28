@@ -27,7 +27,7 @@ Engine::Engine()
 
 	//m_Window = std::move(consoleWindow);
 
-	m_Window = std::make_unique<WindowsWindow>(1000, 1000);
+	m_Window = std::make_unique<WindowsWindow>(700, 700);
 	m_Scene = std::make_unique<Scene>();
 
 	//m_Window->DisableResize();

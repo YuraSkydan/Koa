@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Sphere.h">
+    <ClInclude Include="src\Raytracing\Sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\HitRecord.h">
+    <ClInclude Include="src\Raytracing\HitRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ray.h">
+    <ClInclude Include="src\Raytracing\Ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Scene\Scene.h">
@@ -264,13 +264,13 @@
     <ClInclude Include="src\Physics\Physics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Material.h">
+    <ClInclude Include="src\Raytracing\Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lambertian.h">
+    <ClInclude Include="src\Raytracing\Lambertian.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Metal.h">
+    <ClInclude Include="src\Raytracing\Metal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Keys.h">
@@ -293,10 +293,10 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Ray.cpp">
+    <ClCompile Include="src\Raytracing\Ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Sphere.cpp">
+    <ClCompile Include="src\Raytracing\Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Scene\Entity.cpp">
@@ -395,13 +395,13 @@
     <ClCompile Include="src\Math\VectorOperations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\HitRecord.cpp">
+    <ClCompile Include="src\Raytracing\HitRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Lambertian.cpp">
+    <ClCompile Include="src\Raytracing\Lambertian.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Metal.cpp">
+    <ClCompile Include="src\Raytracing\Metal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Window\ConsoleWindow.cpp">

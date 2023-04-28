@@ -2,13 +2,13 @@
 #include "../Math/VectorOperations.h"
 #include "../Components/Transform.h"
 #include "../Core/Engine.h"
-#include "../Core/Input.h"
-#include "../Ray.h"
-#include "../HitRecord.h"
-#include "../Sphere.h"
 #include "../Core/Time.h"
-#include "../Metal.h"
-#include "../Lambertian.h"
+#include "../Core/Input.h"
+#include "../Raytracing/Ray.h"
+#include "../Raytracing/HitRecord.h"
+#include "../Raytracing/Sphere.h"
+#include "../Raytracing/Metal.h"
+#include "../Raytracing/Lambertian.h"
 
 Vector3f RaytracerExample::ColorRaytrace(const Ray& ray, int depth)
 {
@@ -119,8 +119,8 @@ void RaytracerExample::RaytracePart(float xStart, float xEnd)
 {
 	Window* window = Engine::Get().GetWindow();
 
-	float xStep = 2.0f / float(1000.0f);
-	float yStep = 2.0f / float(1000.0f);
+	float xStep = 2.0f / float(window->GetWidth());
+	float yStep = 2.0f / float(window->GetHeight());
 
 	Vector3f zAxis = Vector3f(sin(m_CameraAngle), 0.0f, cos(m_CameraAngle));
 	Vector3f xAxis = Cross(Vector3f(0.0f, 1.0f, 0.0f), zAxis);
@@ -163,8 +163,8 @@ void RaytracerExample::OnUpdate()
 	//	thread.join();
 	//}
 
-	float xStep = 2.0f / float(1000.0f);
-	float yStep = 2.0f / float(1000.0f);
+	float xStep = 2.0f / float(window->GetWidth());
+	float yStep = 2.0f / float(window->GetHeight());
 
 	Vector3f zAxis = Vector3f(sin(m_CameraAngle), 0.0f, cos(m_CameraAngle));
 	Vector3f xAxis = Cross(Vector3f(0.0f, 1.0f, 0.0f), zAxis);
@@ -173,13 +173,21 @@ void RaytracerExample::OnUpdate()
 	{
 		for (float y = -1.0f; y < 1.0f; y += yStep)
 		{
-			Vector3f direction = x * xAxis + Vector3f(0.0f, y, 0.0f) + zAxis;
+			Vector3f color(0.0f);
+			for (size_t s = 0; s < m_MaxDepth; s++)
+			{
+				Vector3f direction = (x + float(drand48() / float(window->GetWidth()))) * xAxis + Vector3f(0.0f, (y + drand48() / float(window->GetWidth())), 0.0f) + zAxis;
 
-			Ray ray(m_PlayerPosition, direction.Normalized());
-			HitRecord record;
+				//Vector3f direction = x * xAxis + Vector3f(0.0f, y, 0.0f) + zAxis;
+				Ray ray(m_PlayerPosition, direction.Normalized());
+				color += ColorRaytrace(ray, 0);
+			}
 
-			Color color(ColorRaytrace(ray, 0) * 255.0f);
-			window->SetPixel(x, y, color);
+			color /= float(m_MaxDepth);
+			//color = Vector3f(sqrt(color.x), sqrt(color.y), sqrt(color.z));
+			color *= 255.99f;
+
+			window->SetPixel(x, y, Color(color));
 		}
 	}
 

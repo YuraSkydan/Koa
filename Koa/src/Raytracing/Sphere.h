@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 
-#include "Components/Component.h"
+#include "../Components/Component.h"
 #include "Material.h"
 
 class Ray;
