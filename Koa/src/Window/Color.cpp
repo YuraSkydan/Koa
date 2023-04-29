@@ -1,5 +1,6 @@
 #include "Color.h"
 #include "../Math/VectorOperations.h"
+#include "../Core/Engine.h"
 
 std::vector<std::pair<Vector3ui, Color>> Color::s_RGBColors =
   { { Vector3ui(0, 0, 0), { Color::Black, Shade::None } },
@@ -103,26 +104,28 @@ void Color::SetColorRGB(const Vector3ui& color)
 {
 	m_RGBColor = color;
 
-
-	/*auto closestColor = s_RGBColors.begin();
-	float closestDistance = FLT_MAX;
-
-	for (auto it = s_RGBColors.begin(), end = s_RGBColors.end(); it != end; ++it)
+	if (Engine::Get().GetWindowContext() == Engine::WindowContext::Console)
 	{
-		int dr = int(color.x) - int(it->first.x);
-		int dg = int(color.y) - int(it->first.y);
-		int db = int(color.z) - int(it->first.z);
-		float distance = sqrt(dr * dr + dg * dg + db * db);
-		
-		if (distance < closestDistance)
-		{
-			closestDistance = distance;
-			closestColor = it;
-		}
-	}
+		auto closestColor = s_RGBColors.begin();
+		float closestDistance = FLT_MAX;
 
-	m_ConsoleColor = closestColor->second.GetConsoleColor();
-	m_ConsoleColorShade = closestColor->second.GetConsoleColorShade();*/
+		for (auto it = s_RGBColors.begin(), end = s_RGBColors.end(); it != end; ++it)
+		{
+			int dr = int(m_RGBColor.x) - int(it->first.x);
+			int dg = int(m_RGBColor.y) - int(it->first.y);
+			int db = int(m_RGBColor.z) - int(it->first.z);
+			float distance = sqrt(dr * dr + dg * dg + db * db);
+
+			if (distance < closestDistance)
+			{
+				closestDistance = distance;
+				closestColor = it;
+			}
+		}
+
+		m_ConsoleColor = closestColor->second.GetConsoleColor();
+		m_ConsoleColorShade = closestColor->second.GetConsoleColorShade();
+	}
 }
 
 void Color::SetConsoleColorShade(Shade shade)

@@ -4,17 +4,15 @@
 #include "Engine.h"
 #include "Time.h"
 
-//Remove later maybe 
-#include "../Math/Vector2.h"
-
 #include "../Window/WindowsWindow.h"
 
 Engine::Engine()
+	: m_Context(WindowContext::Windows)
 {
 	s_Instance = this;
 
 	//auto consoleWindow = std::make_unique<ConsoleWindow>(500, 500);
-	
+
 	//int windowWidth = 500;
 	//int windowHeight = 500;
 
@@ -26,7 +24,6 @@ Engine::Engine()
 	//consoleWindow->SetConsoleWindowSize({ 0, 0, short(windowWidth - 1), short(windowHeight - 1) });
 
 	//m_Window = std::move(consoleWindow);
-
 	m_Window = std::make_unique<WindowsWindow>(700, 700);
 	m_Scene = std::make_unique<Scene>();
 
@@ -37,6 +34,33 @@ Engine::Engine()
 	//window.Update();
 
 	m_Scene->Start();
+}
+
+Engine::Engine(int width, int height, WindowContext context)
+	: m_Context(context)
+{
+	switch (m_Context)
+	{
+	case WindowContext::Console:
+	{
+		auto consoleWindow = std::make_unique<ConsoleWindow>(width, height);
+		consoleWindow->DisableCursor();
+		consoleWindow->SetFont(L"LHF Full Block", 2, 2);
+
+		consoleWindow->SetConsoleBufferSize({ short(width), short(height) });
+		consoleWindow->SetConsoleWindowSize({ 0, 0, short(width - 1), short(height - 1) });
+
+		m_Window = std::move(consoleWindow);
+		break;
+	}
+	case WindowContext::Windows:
+		m_Window = std::make_unique<WindowsWindow>(width, height);
+
+		break;
+	}
+
+	m_Scene = std::make_unique<Scene>();
+
 }
 
 void Engine::Run()
@@ -81,6 +105,11 @@ Window* Engine::GetWindow()
 Scene* Engine::GetScene()
 {
 	return m_Scene.get();
+}
+
+Engine::WindowContext Engine::GetWindowContext() const
+{
+	return m_Context;
 }
 
 Engine& Engine::Get()
