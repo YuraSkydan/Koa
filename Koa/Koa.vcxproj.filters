@@ -51,7 +51,7 @@
     <ClInclude Include="src\Components\Physics\Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Components\Grid.h">
+    <ClInclude Include="src\Physics\PixelPhysicsGrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Components\Renderers\LineRenderer.h">
@@ -261,7 +261,7 @@
     <ClInclude Include="src\Math\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Physics\Physics.h">
+    <ClInclude Include="src\Physics\PhysicsWorld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Raytracing\Material.h">
@@ -286,6 +286,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Window\WindowsWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sandbox\PixelPhysicsExample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Physics\PixelPhysics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -323,7 +332,7 @@
     <ClCompile Include="src\Components\Physics\Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Components\Grid.cpp">
+    <ClCompile Include="src\Physics\PixelPhysicsGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Components\Renderers\LineRenderer.cpp">
@@ -386,7 +395,7 @@
     <ClCompile Include="src\Math\Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Physics\Physics.cpp">
+    <ClCompile Include="src\Physics\PhysicsWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Window\Color.cpp">
@@ -411,6 +420,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Window\WindowsWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sandbox\PixelPhysicsExample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Physics\PixelPhysics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

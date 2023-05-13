@@ -1,6 +1,7 @@
 #include "PhysicsExample.h"
 #include "../Core/Engine.h"
 
+#include "../Components/Transform.h"
 #include "../Components/Renderers/SpriteRenderer.h"
 #include "../Components/Physics/Rigidbody.h"
 #include "../Components/Physics/BoxCollider.h"

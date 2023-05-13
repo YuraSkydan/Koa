@@ -129,50 +129,6 @@ void RaytracerExample::RaytracePart(float xStart, float xEnd)
 	{
 		for (float y = -1.0f; y < 1.0f; y += yStep)
 		{
-			Vector3f direction = x * xAxis + Vector3f(0.0f, y, 0.0f) + zAxis;
-
-			Ray ray(m_PlayerPosition, direction.Normalized());
-			HitRecord record;
-
-			Color color(ColorRaytrace(ray, 0) * 255.0f);
-			window->SetPixel(x, y, color);
-		}
-	}
-}
-
-void RaytracerExample::OnUpdate()
-{
-	Window* window = Engine::Get().GetWindow();
-
-	//double xStep = 2.0f / float(1000.0f);
-	//double yStep = 2.0f / float(1000.0f);
-
-	//unsigned int threadsAmount = std::thread::hardware_concurrency();
-	//std::vector<std::thread> threads;
-	//threads.reserve(threadsAmount);
-
-	//for (size_t i = 0; i < threadsAmount; i++)
-	//{
-	//	float xStart = -1.0f + 2.0f / float(threadsAmount) * float(i);
-	//	float xEnd = -1.0f + 2.0f / float(threadsAmount) * float(i + 1);
-	//	threads.push_back(std::thread(&RaytracerExample::RaytracePart, this, xStart, xEnd));
-	//}
-
-	//for (auto& thread : threads)
-	//{
-	//	thread.join();
-	//}
-
-	float xStep = 2.0f / float(window->GetWidth());
-	float yStep = 2.0f / float(window->GetHeight());
-
-	Vector3f zAxis = Vector3f(sin(m_CameraAngle), 0.0f, cos(m_CameraAngle));
-	Vector3f xAxis = Cross(Vector3f(0.0f, 1.0f, 0.0f), zAxis);
-
-	for (float x = -1.0f; x < 1.0f; x += xStep)
-	{
-		for (float y = -1.0f; y < 1.0f; y += yStep)
-		{
 			Vector3f color(0.0f);
 			for (size_t s = 0; s < m_MaxDepth; s++)
 			{
@@ -190,8 +146,36 @@ void RaytracerExample::OnUpdate()
 			window->SetPixel(x, y, Color(color));
 		}
 	}
+}
 
-	m_CameraAngle = ToRadians(Input::GetMousePosition().x);
+void RaytracerExample::OnUpdate()
+{
+	Window* window = Engine::Get().GetWindow();
+
+#if MULTITHREADED_RAYTRACING
+	double xStep = 2.0f / float(window->GetWidth());
+	double yStep = 2.0f / float(window->GetHeight());
+
+	unsigned int threadsAmount = std::thread::hardware_concurrency();
+	std::vector<std::thread> threads;
+	threads.reserve(threadsAmount);
+
+	for (size_t i = 0; i < threadsAmount; i++)
+	{
+		float xStart = -1.0f + 2.0f / float(threadsAmount) * float(i);
+		float xEnd = -1.0f + 2.0f / float(threadsAmount) * float(i + 1);
+		threads.push_back(std::thread(&RaytracerExample::RaytracePart, this, xStart, xEnd));
+	}
+
+	for (auto& thread : threads)
+	{
+		thread.join();
+	}
+#else
+	RaytracePart(-1.0f, 1.0f);
+#endif
+
+	//m_CameraAngle = ToRadians(Input::GetMousePosition().x);
 
 	if (Input::IsKeyPressed(Key::Left))
 	{

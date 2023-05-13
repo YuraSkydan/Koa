@@ -40,7 +40,7 @@ WCHAR ConsoleWindow::GetShadeCharacter(Color::Shade shade)
 	}
 }
 
-ConsoleWindow::ConsoleWindow(int width, int height)
+ConsoleWindow::ConsoleWindow(int width, int height, int pixelWidth, int pixelHeight)
 	: Window(width, height)
 {
 #if CUSTOM_CONSOLE_BUFFER
@@ -69,10 +69,10 @@ ConsoleWindow::ConsoleWindow(int width, int height)
 
 	SetConsoleActiveScreenBuffer(m_Console);
 
-	ResizeBuffers();
+	SetFont(L"LHF Full Block", pixelWidth, pixelHeight);
 
-	SetConsoleBufferSize({ short(width + 1), short(height + 1) });
-	SetConsoleWindowSize({ short(width), short(height) });
+	SetConsoleBufferSize({ short(width), short(height) });
+	SetConsoleWindowSize({ 0, 0, short(width - 1), short(height - 1) });
 }
 
 void ConsoleWindow::Update()

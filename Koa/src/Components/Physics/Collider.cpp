@@ -1,13 +1,14 @@
 #include "Collider.h"
 #include "Rigidbody.h"
+#include "../Transform.h"
 #include "../../Scene/Scene.h"
-#include "../../Physics/Physics.h"
+#include "../../Physics/PhysicsWorld.h"
 #include "../../Math/Math.h"
 
-Collider::Collider(Entity* entity)
-	: Trigger(entity)
-	, Collision(entity)
-	, Component(entity)
+Collider::Collider(Entity* owner)
+	: Trigger(owner)
+	, Collision(owner)
+	, Component(owner)
 { }
 
 void Collider::Start()
@@ -20,8 +21,8 @@ void Collider::Start()
 	else
 	{
 		b2BodyDef bodyDef;	
-		Vector3f position = GetTransform()->GetPosition();
-		float angle = GetTransform()->GetEulerAngles().z;
+		Vector3f position = m_Transform->GetPosition();
+		float angle = m_Transform->GetEulerAngles().z;
 
 		bodyDef.position = { position.x, position.y};
 		bodyDef.angle = ToRadians(-angle);
@@ -89,4 +90,14 @@ void Collider::SetFixtureDef()
 b2Body* Collider::GetBody() const
 {
 	return m_Body;
+}
+
+bool Collider::IsTrigger() const
+{
+	return m_IsTrigger;
+}
+
+const Vector2f& Collider::GetOffset() const
+{
+	return m_Offset;
 }

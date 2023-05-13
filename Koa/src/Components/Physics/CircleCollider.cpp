@@ -7,9 +7,9 @@ void CircleCollider::SetShape()
 	m_Shape.m_p = center;
 }
 
-CircleCollider::CircleCollider(Entity* entity)
-	: Collider(entity)
-	, Component(entity)
+CircleCollider::CircleCollider(Entity* owner)
+	: Collider(owner)
+	, Component(owner)
 { }
 
 void CircleCollider::Start()
@@ -24,18 +24,7 @@ void CircleCollider::SetRadius(float radius)
 	ResetShape();
 }
 
-//void CircleCollider::Serialize(json& out) const
-//{
-//	out["CircleCollider"] =
-//	{
-//		{ "Radius", m_Radius }
-//	};
-//
-//	Collider::Serialize(out["CircleCollider"]);
-//}
-//
-//void CircleCollider::Deserialize(json& in)
-//{
-//	m_Radius = in["Radius"];
-//	Collider::Deserialize(in);
-//}
+float CircleCollider::GetRadius() const
+{
+	return m_Radius;
+}

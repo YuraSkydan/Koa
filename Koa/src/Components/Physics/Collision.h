@@ -4,6 +4,6 @@
 class Collision : virtual public Component
 {
 protected:
-	Collision(Entity* entity);
+	Collision(Entity* owner);
 	virtual ~Collision() = default;
 };

@@ -3,7 +3,7 @@
 //Remove later
 #include "../Core/Engine.h"
 #include "../Core/Time.h"
-#include "../Physics/Physics.h"
+#include "../Physics/PhysicsWorld.h"
 #include "../Components/Renderers/SpriteRenderer.h"
 #include "../Components/Renderers/PixelRenderer.h"
 #include "../Components/Transform.h"
@@ -94,7 +94,7 @@ void Scene::Render()
 			PixelRenderer* pixelRenderer = m_Entities[i]->GetComponent<PixelRenderer>();
 			
 			Vector3f position = pixelRenderer->GetTransform()->GetPosition();
-			Engine::Get().GetWindow()->SetPixel(position.x, position.y, pixelRenderer->GetColor());
+			Engine::Get().GetWindow()->SetPixel(int(position.x), int(position.y), pixelRenderer->GetColor());
 		}
 	}
 }

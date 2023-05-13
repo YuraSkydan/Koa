@@ -1,9 +1,10 @@
 #include "Rigidbody.h"
+#include "../Transform.h"
 #include "../../Math/Math.h"
-#include "../../Physics/Physics.h"
+#include "../../Physics/PhysicsWorld.h"
 
-Rigidbody::Rigidbody(Entity* entity)
-	:Component(entity)
+Rigidbody::Rigidbody(Entity* owner)
+	:Component(owner)
 { }
 
 void Rigidbody::Awake()
@@ -186,4 +187,39 @@ Vector2f Rigidbody::GetLinearVelocity() const
 void Rigidbody::SetBody(b2Body* body)
 {
 	m_Body = body;
+}
+
+float Rigidbody::GetAngularVelocity() const
+{
+	return m_Body->GetAngularVelocity();
+}
+
+float Rigidbody::GetGravityScale() const 
+{
+	return m_GravityScale;
+}
+
+float Rigidbody::GetAngularDrag() const
+{
+	return m_AngularDrag;
+}
+
+float Rigidbody::GetLinearDrag() const
+{
+	return m_LinearDrag;
+}
+
+float Rigidbody::GetMass() const
+{
+	return m_Mass;
+}
+
+bool Rigidbody::GetFixedRotation() const
+{
+	return m_FixedRotation;
+}
+
+BodyType Rigidbody::GetBodyType() const
+{
+	return m_Type;
 }

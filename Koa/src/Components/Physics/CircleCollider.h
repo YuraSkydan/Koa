@@ -14,13 +14,10 @@ private:
 	void SetShape() override;
 
 public:
-	CircleCollider(Entity* entity);
+	CircleCollider(Entity* owner);
 
 	void Start() override;
 
 	void SetRadius(float radius);
-	float GetRadius() const { return m_Radius; }
-
-	//void Serialize(json& out) const override;
-	//void Deserialize(json& in) override;
+	float GetRadius() const;
 };

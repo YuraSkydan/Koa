@@ -12,7 +12,7 @@ private:
 	void SetShape() override;
 
 public:
-	BoxCollider(Entity* entity);
+	BoxCollider(Entity* owner);
 
 	void Start() override;
 	void Reset() override;

@@ -41,7 +41,7 @@ private:
 	WCHAR GetShadeCharacter(Color::Shade shade);
 
 public:
-	ConsoleWindow(int width, int height);
+	ConsoleWindow(int width, int height, int pixelWidth, int pixelHeight);
 
 	void Update() override;
 

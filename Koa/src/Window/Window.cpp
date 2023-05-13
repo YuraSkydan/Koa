@@ -4,80 +4,6 @@
 #include "ConsoleWindow.h"
 #include "../Math/VectorOperations.h"
 
-//void Window::ResizeBuffers()
-//{
-//	m_BufferSize = int(m_ConsoleBufferSize.X) * int(m_ConsoleBufferSize.Y);
-//	m_Buffers[0].resize(m_BufferSize);
-//	m_Buffers[1].resize(m_BufferSize);
-//
-//	memset(m_Buffers[0].data(), 0, m_Buffers[0].size() * sizeof(CHAR_INFO));
-//	memset(m_Buffers[1].data(), 0, m_Buffers[1].size() * sizeof(CHAR_INFO));
-//}
-//
-//void Window::DrawPart(const COORD& writePosition, SMALL_RECT ConsoleWindowSize)
-//{
-//	WriteConsoleOutput(m_Console, m_Buffers[m_CurrentBufferIndex].data(), m_ConsoleBufferSize, writePosition, &ConsoleWindowSize);
-//}
-//
-//WCHAR Window::GetShadeCharacter(Color::Shade shade)
-//{
-//	switch (shade)
-//	{
-//	case Color::Shade::None:
-//		return 9608;
-//
-//	case Color::Shade::Dark:
-//		return 9619;
-//
-//	case Color::Shade::Medium:
-//		return 9618;
-//
-//	case Color::Shade::Light:
-//		return 9617;
-//
-//	case Color::Shade::Transparent:
-//		return  ' ';
-//	}
-//}
-//
-//Window::ConsoleWindow()
-//{
-//#if CUSTOM_CONSOLE_BUFFER
-//	m_ConsoleBuffer = CreateConsoleScreenBuffer(GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-//	SetConsoleActiveScreenBuffer(m_ConsoleBuffer);
-//#endif
-//
-//	m_Console = GetStdHandle(STD_OUTPUT_HANDLE);
-//	m_ConsoleWindow = GetConsoleWindow();
-//	m_Style = GetWindowLong(m_ConsoleWindow, GWL_STYLE);
-//
-//	GetConsoleCursorInfo(m_Console, &m_ConsoleCursor);
-//	GetConsoleScreenBufferInfo(m_Console, &m_ConsoleBufferInfo);
-//
-//	m_ConsoleWindowSize = m_ConsoleBufferInfo.srWindow;
-//	m_ConsoleBufferSize = m_ConsoleBufferInfo.dwSize;
-//	m_WritePosition = { 0, 0 };
-//
-//	m_CurrentBufferIndex = 0;
-//	m_NextBufferIndex = 1;
-//
-//	DWORD prev_mode;
-//	GetConsoleMode(m_Console, &prev_mode);
-//	SetConsoleMode(m_Console, ENABLE_EXTENDED_FLAGS |
-//		(prev_mode & ~ENABLE_QUICK_EDIT_MODE));
-//
-//	SetConsoleActiveScreenBuffer(m_Console);
-//
-//	ResizeBuffers();
-//}
-//
-//Window::ConsoleWindow(short width, short height)
-//	: ConsoleWindow()
-//{
-//	SetConsoleBufferSize({ short(width + 1), short(height + 1) });
-//	SetConsoleWindowSize({ width, height });
-//}
-
 Window::Window(int width, int height)
 	: m_Width(width), m_Height(height)
 { }
@@ -86,28 +12,6 @@ void Window::Update()
 {
 	Draw();
 }
-
-//void Window::SetPixel(int x, int y, Color color)
-//{
-//	if (x < 0 || y < 0 || x >= m_ConsoleBufferSize.X || y >= m_ConsoleBufferSize.Y)
-//	{
-//		return;
-//	}
-//
-//	unsigned int position = y * m_ConsoleBufferSize.X + x;
-//
-//	m_Buffers[m_NextBufferIndex][position].Char.UnicodeChar = GetShadeCharacter(color.GetShade());
-//	m_Buffers[m_NextBufferIndex][position].Attributes = WORD(color.GetColorValue());
-//}
-//
-//void Window::SetPixel(float x, float y, Color color)
-//{
-//	int pixelX = (x * m_ConsoleBufferSize.X / 2.0f) + m_ConsoleBufferSize.X / 2.0f;
-//	int pixelY = (-y * m_ConsoleBufferSize.Y / 2.0f) + m_ConsoleBufferSize.Y / 2.0f;
-//
-//	SetPixel(pixelX, pixelY, color);
-//}
-
 
 void Window::SetPixel(float x, float y, Color color)
 {

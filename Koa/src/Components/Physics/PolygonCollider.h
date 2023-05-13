@@ -14,7 +14,7 @@ private:
 	void SetShape() override;
 
 public:
-	PolygonCollider(Entity* gameObject);
+	PolygonCollider(Entity* owner);
 
 	void Start() override;
 	void AddVertex(const Vector2f& vertexPos);
@@ -28,9 +28,4 @@ public:
 	//------------------------------------------------------
 	//Getters
 	const std::vector<b2Vec2>& GetVertices() const { return m_Vertices; }
-
-	//------------------------------------------------------
-	//Serialization
-	void Serialize(json& out) const override;
-	void Deserialize(json& in) override;
 };

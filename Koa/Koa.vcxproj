@@ -135,6 +135,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Components\Mesh.h" />
+    <ClInclude Include="src\Components\Physics\PixelPhysics.h" />
+    <ClInclude Include="src\Sandbox\PixelPhysicsExample.h" />
     <ClInclude Include="src\Window\ConsoleWindow.h" />
     <ClInclude Include="src\Window\OpenGLWindow.h" />
     <ClInclude Include="src\Core\Keys.h" />
@@ -147,7 +150,7 @@
     <ClInclude Include="src\Math\Math.h" />
     <ClInclude Include="src\Math\MatrixTransform.h" />
     <ClInclude Include="src\Math\VectorOperations.h" />
-    <ClInclude Include="src\Physics\Physics.h" />
+    <ClInclude Include="src\Physics\PhysicsWorld.h" />
     <ClInclude Include="src\Sandbox\RenderingExample.h" />
     <ClInclude Include="src\Components\Component.h" />
     <ClInclude Include="src\Components\Physics\BoxCollider.h" />
@@ -156,7 +159,7 @@
     <ClInclude Include="src\Components\Renderers\CircleRenderer.h" />
     <ClInclude Include="src\Components\Physics\Collider.h" />
     <ClInclude Include="src\Components\Physics\Collision.h" />
-    <ClInclude Include="src\Components\Grid.h" />
+    <ClInclude Include="src\Physics\PixelPhysicsGrid.h" />
     <ClInclude Include="src\Components\Renderers\LineRenderer.h" />
     <ClInclude Include="src\Components\Physics\Material.h" />
     <ClInclude Include="src\Components\Renderers\PixelRenderer.h" />
@@ -228,6 +231,9 @@
     <ClInclude Include="src\Window\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\Mesh.cpp" />
+    <ClCompile Include="src\Components\Physics\PixelPhysics.cpp" />
+    <ClCompile Include="src\Sandbox\PixelPhysicsExample.cpp" />
     <ClCompile Include="src\Window\ConsoleWindow.cpp" />
     <ClCompile Include="src\Window\OpenGLWindow.cpp" />
     <ClCompile Include="src\Raytracing\Metal.cpp" />
@@ -237,7 +243,7 @@
     <ClCompile Include="src\Raytracing\HitRecord.cpp" />
     <ClCompile Include="src\Math\Math.cpp" />
     <ClCompile Include="src\Math\VectorOperations.cpp" />
-    <ClCompile Include="src\Physics\Physics.cpp" />
+    <ClCompile Include="src\Physics\PhysicsWorld.cpp" />
     <ClCompile Include="src\Sandbox\RenderingExample.cpp" />
     <ClCompile Include="src\Components\Component.cpp" />
     <ClCompile Include="src\Components\Physics\BoxCollider.cpp" />
@@ -246,7 +252,7 @@
     <ClCompile Include="src\Components\Renderers\CircleRenderer.cpp" />
     <ClCompile Include="src\Components\Physics\Collider.cpp" />
     <ClCompile Include="src\Components\Physics\Collision.cpp" />
-    <ClCompile Include="src\Components\Grid.cpp" />
+    <ClCompile Include="src\Physics\PixelPhysicsGrid.cpp" />
     <ClCompile Include="src\Components\Renderers\LineRenderer.cpp" />
     <ClCompile Include="src\Components\Renderers\PixelRenderer.cpp" />
     <ClCompile Include="src\Components\Physics\PolygonCollider.cpp" />

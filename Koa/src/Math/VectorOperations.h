@@ -17,6 +17,7 @@ inline Vector3<T>::Vector3(const Vector2<U>& other)
 {
 	x = other.x;
 	y = other.y;
+	z = 0;
 }
 
 template<typename T>

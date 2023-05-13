@@ -29,7 +29,7 @@ private:
 
 private:
 	Engine();
-	Engine(int width, int height, WindowContext context);
+	Engine(int width, int height, int pixelWidth, int pixelHeight, WindowContext context);
 
 public:
 	

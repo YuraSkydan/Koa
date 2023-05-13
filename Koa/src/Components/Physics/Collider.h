@@ -1,9 +1,9 @@
 #pragma once
-#include "box2d/b2_fixture.h"
-#include "../../Math/Vector2.h"
 #include "Collision.h"
 #include "Trigger.h"
 #include "Material.h"
+#include "box2d/b2_fixture.h"
+#include "../../Math/Vector2.h"
 
 class KOA_API Collider : public Collision, public Trigger
 {
@@ -17,7 +17,7 @@ public:
 	PhysicsMaterial material;
 
 protected:
-	Collider(Entity* gameObject);
+	Collider(Entity* owner);
 
 	void Start() override;
 
@@ -29,12 +29,9 @@ protected:
 
 	b2Body* GetBody() const;
 
-	//void Serialize(json& out) const override;
-	//void Deserialize(json& in) override;
-
 public:
 	void SetOffset(const Vector2f& offset);
 	void SetIsTrigger(bool isTrigger);
-	bool IsTrigger() const { return m_IsTrigger; }
-	const Vector2f& GetOffset() const { return m_Offset; }
+	bool IsTrigger() const;
+	const Vector2f& GetOffset() const;
 };

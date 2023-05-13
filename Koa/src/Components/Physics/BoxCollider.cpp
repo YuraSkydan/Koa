@@ -1,10 +1,10 @@
 #include "BoxCollider.h"
-#include "Rigidbody.h"
+#include "../Transform.h"
 #include "../../Scene/Entity.h"
 
 void BoxCollider::SetShape()
 {
-	Vector3f scale = GetTransform()->GetScale();
+	Vector3f scale = m_Transform->GetScale();
 	float sizeX = m_Size.x * scale.x;
 	float sizeY = m_Size.y * scale.y;
 	b2Vec2 center = b2Vec2(m_Offset.x, m_Offset.y);
@@ -12,9 +12,9 @@ void BoxCollider::SetShape()
 	m_Shape.SetAsBox(abs(sizeX), abs(sizeY), center, 0);
 }
 
-BoxCollider::BoxCollider(Entity* entity)
-	: Collider(entity),
-	  Component(entity)
+BoxCollider::BoxCollider(Entity* owner)
+	: Collider(owner),
+	  Component(owner)
 { }
 
 void BoxCollider::Start()

@@ -1,6 +1,7 @@
 #pragma once
-#include "../Transform.h"
 #include "box2d/b2_body.h"
+#include "../Component.h"
+#include "../../Math/Vector2.h"
 
 enum class KOA_API BodyType { Static = 0, Kinematic, Dynamic };
 enum class KOA_API ForceMode { Force = 0, Acceleration, Impulse, VelocityChange };
@@ -11,9 +12,9 @@ private:
 	b2Body* m_Body = nullptr;
 	BodyType m_Type = BodyType::Dynamic;
 
-	float m_Mass         = 1.0f;
-	float m_LinearDrag   = 0.0f;
-	float m_AngularDrag  = 0.05f;
+	float m_Mass = 1.0f;
+	float m_LinearDrag = 0.0f;
+	float m_AngularDrag = 0.05f;
 	float m_GravityScale = 1.0f;
 
 	bool m_FixedRotation = false;
@@ -27,7 +28,7 @@ private:
 	b2Body* GetBody() const { return m_Body; }
 
 public:
-	Rigidbody(Entity* entity);
+	Rigidbody(Entity* owner);
 
 	void Awake() override;
 	void Update() override;
@@ -53,12 +54,12 @@ public:
 	//Getters
 	Vector2f GetLinearVelocity() const;
 
-	float GetAngularVelocity() const { return m_Body->GetAngularVelocity(); };
-	float GetGravityScale() const { return m_GravityScale; }
-	float GetAngularDrag() const { return m_AngularDrag; }
-	float GetLinearDrag() const { return m_LinearDrag; }
-	float GetMass() const { return m_Mass; }
+	float GetAngularVelocity() const;
+	float GetGravityScale() const;
+	float GetAngularDrag() const;
+	float GetLinearDrag() const;
+	float GetMass() const;
 
-	bool GetFixedRotation() const { return m_FixedRotation; }
-	BodyType GetBodyType() const { return m_Type; }
+	bool GetFixedRotation() const;
+	BodyType GetBodyType() const;
 };

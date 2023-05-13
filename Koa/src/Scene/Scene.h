@@ -21,6 +21,14 @@ public:
 	void Raytrace();
 
 	Entity* CreateEntity();
+
+	const std::string& GetName() const;
+
+	template<typename T>
+	void OnComponentAdded(const T* component);
+
+	template<typename T>
+	void OnComponentRemoved(const T* component);
 };
 
 //----------------------------------

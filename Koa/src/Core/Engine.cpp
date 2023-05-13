@@ -36,31 +36,27 @@ Engine::Engine()
 	m_Scene->Start();
 }
 
-Engine::Engine(int width, int height, WindowContext context)
+Engine::Engine(int width, int height, int pixelWidth, int pixelHeight, WindowContext context)
 	: m_Context(context)
 {
+	s_Instance = this;
+
 	switch (m_Context)
 	{
 	case WindowContext::Console:
 	{
-		auto consoleWindow = std::make_unique<ConsoleWindow>(width, height);
+		auto consoleWindow = std::make_unique<ConsoleWindow>(width, height, pixelWidth, pixelHeight);
 		consoleWindow->DisableCursor();
-		consoleWindow->SetFont(L"LHF Full Block", 2, 2);
-
-		consoleWindow->SetConsoleBufferSize({ short(width), short(height) });
-		consoleWindow->SetConsoleWindowSize({ 0, 0, short(width - 1), short(height - 1) });
-
 		m_Window = std::move(consoleWindow);
 		break;
 	}
 	case WindowContext::Windows:
 		m_Window = std::make_unique<WindowsWindow>(width, height);
-
 		break;
 	}
 
 	m_Scene = std::make_unique<Scene>();
-
+	m_Scene->Start();
 }
 
 void Engine::Run()
@@ -69,7 +65,7 @@ void Engine::Run()
 	{
 		Time::FrameStart();
 
-		m_Window->Clear();
+	    m_Window->Clear();
 		m_LayerStack.UpdateLayers();
 		m_Scene->Update();
 		m_Scene->Render();

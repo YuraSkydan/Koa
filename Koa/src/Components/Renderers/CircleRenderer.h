@@ -1,11 +1,15 @@
 #pragma once
-class CircleRenderer
+#include "RendererComponent.h"
+
+class CircleRenderer : public RendererComponent
 {
 private:
 	float m_Radius;
 
 public:
-	float SetRadius(float radius);
-	float GerRadius() const;
+	CircleRenderer(Entity* owner);
+
+	void SetRadius(float radius);
+	float GetRadius() const;
 };
 
