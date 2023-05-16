@@ -5,4 +5,4 @@
 #define drand48() ((double)rand()/RAND_MAX)
 
 float KOA_API ToRadians(float degrees);
-float KOA_API ToDegrees(float rads);
+float KOA_API ToDegrees(float radians);

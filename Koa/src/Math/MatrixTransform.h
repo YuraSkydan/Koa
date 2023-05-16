@@ -1,5 +1,6 @@
 #pragma once
 #include <numbers>
+#include <cmath>
 
 #include "Matrix.h"
 #include "Vector2.h"
@@ -68,7 +69,7 @@ namespace MatrixTransform
 	template<typename T>
 	Matrix<T, 3> Rotate(const Matrix<T, 3>& m, const Vector3<T>& v)
 	{
-
+		return Matrix<T, 3>();
 	}
 
 	template<typename T>
@@ -133,4 +134,8 @@ namespace MatrixTransform
 
 		return scaled;
 	}
+
+	Matrix4x4f PrespectiveMatrix(float fov, float aspectRatio, float nearClip, float farClip);
+
+	Matrix4x4f OrthographicMatrix(float left, float right, float bottom, float top);
 }

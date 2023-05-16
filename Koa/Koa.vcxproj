@@ -135,6 +135,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Math\Vector4.h" />
+    <ClInclude Include="src\Sandbox\RenderingExample3D.h" />
     <ClInclude Include="src\Components\Mesh.h" />
     <ClInclude Include="src\Components\Physics\PixelPhysics.h" />
     <ClInclude Include="src\Sandbox\PixelPhysicsExample.h" />
@@ -151,7 +153,7 @@
     <ClInclude Include="src\Math\MatrixTransform.h" />
     <ClInclude Include="src\Math\VectorOperations.h" />
     <ClInclude Include="src\Physics\PhysicsWorld.h" />
-    <ClInclude Include="src\Sandbox\RenderingExample.h" />
+    <ClInclude Include="src\Sandbox\RenderingExample2D.h" />
     <ClInclude Include="src\Components\Component.h" />
     <ClInclude Include="src\Components\Physics\BoxCollider.h" />
     <ClInclude Include="src\Components\Camera.h" />
@@ -231,6 +233,8 @@
     <ClInclude Include="src\Window\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Math\MatrixTransform.cpp" />
+    <ClCompile Include="src\Sandbox\RenderingExample3D.cpp" />
     <ClCompile Include="src\Components\Mesh.cpp" />
     <ClCompile Include="src\Components\Physics\PixelPhysics.cpp" />
     <ClCompile Include="src\Sandbox\PixelPhysicsExample.cpp" />
@@ -244,7 +248,7 @@
     <ClCompile Include="src\Math\Math.cpp" />
     <ClCompile Include="src\Math\VectorOperations.cpp" />
     <ClCompile Include="src\Physics\PhysicsWorld.cpp" />
-    <ClCompile Include="src\Sandbox\RenderingExample.cpp" />
+    <ClCompile Include="src\Sandbox\RenderingExample2D.cpp" />
     <ClCompile Include="src\Components\Component.cpp" />
     <ClCompile Include="src\Components\Physics\BoxCollider.cpp" />
     <ClCompile Include="src\Components\Camera.cpp" />

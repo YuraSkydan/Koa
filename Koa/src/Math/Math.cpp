@@ -9,7 +9,7 @@ float KOA_API ToRadians(float degrees)
     return degrees * DegreesInRad;
 }
 
-float ToDegrees(float rads)
+float ToDegrees(float radians)
 {
-    return rads * RadsInDegrees;
+    return radians * RadsInDegrees;
 }

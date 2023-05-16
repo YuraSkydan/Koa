@@ -1,11 +1,11 @@
-#include "RenderingExample.h"
+#include "RenderingExample2D.h"
 #include "../Core/Engine.h"
 #include "../Core/Time.h"
 #include "../Components/Transform.h"
 #include "../Components/Renderers/SpriteRenderer.h"
 #include "../Components/Renderers/PixelRenderer.h"
 
-RenderingExample::RenderingExample()
+RenderingExample2D::RenderingExample2D()
 {
 	srand(time(0));
 
@@ -16,12 +16,12 @@ RenderingExample::RenderingExample()
 	//m_Entity->AddComponent<SpriteRenderer>();
 }
 
-void RenderingExample::OnAttach()
+void RenderingExample2D::OnAttach()
 {
 
 }
 
-void RenderingExample::OnUpdate()
+void RenderingExample2D::OnUpdate()
 {
 	/*Vector3f scale = m_Entity->GetTransform()->GetScale();
 	Vector3f eulerAngles = m_Entity->GetTransform()->GetEulerAngles();

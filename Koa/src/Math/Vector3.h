@@ -153,7 +153,7 @@ inline Vector3<T>& Vector3<T>::operator*=(const Vector3<U>& v)
 	y *= v.y;
 	z *= v.z;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -164,7 +164,7 @@ inline Vector3<T>& Vector3<T>::operator/=(const Vector3<U>& v)
 	y /= v.y;
 	z /= v.z;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -175,7 +175,7 @@ inline Vector3<T>& Vector3<T>::operator=(U value)
 	y = value;
 	z = value;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -186,7 +186,7 @@ inline Vector3<T>& Vector3<T>::operator+=(U value)
 	y += value;
 	z += value;
 
-	return this;
+	return *this;
 }
 
 template<typename T>
@@ -278,7 +278,7 @@ inline float Vector3<T>::Magnitude() const
 template<typename T>
 inline Vector3<T> operator+(const Vector3<T>& v)
 {
-	return this;
+	return v;
 }
 
 template<typename T>

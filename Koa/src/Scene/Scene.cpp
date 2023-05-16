@@ -7,6 +7,7 @@
 #include "../Components/Renderers/SpriteRenderer.h"
 #include "../Components/Renderers/PixelRenderer.h"
 #include "../Components/Transform.h"
+#include "../Components/Camera.h"
 #include "../Math/VectorOperations.h"
 
 Scene::Scene()
@@ -67,11 +68,7 @@ void Scene::Render()
 	{
 		if (m_Entities[i]->HasComponent<SpriteRenderer>())
 		{
-			std::vector<Vector2f> verticies;
-			for (size_t i = 0; i < square.size(); i++)
-			{
-				verticies.push_back(square[i]);
-			}
+			std::vector<Vector2f> verticies(square);
 
 			SpriteRenderer* spriteRenderer = m_Entities[i]->GetComponent<SpriteRenderer>();
 			Matrix4x4f transformMatrix = m_Entities[i]->GetTransform()->GetTransformMatrix();
@@ -92,10 +89,35 @@ void Scene::Render()
 		if (m_Entities[i]->HasComponent<PixelRenderer>())
 		{
 			PixelRenderer* pixelRenderer = m_Entities[i]->GetComponent<PixelRenderer>();
-			
+
 			Vector3f position = pixelRenderer->GetTransform()->GetPosition();
 			Engine::Get().GetWindow()->SetPixel(int(position.x), int(position.y), pixelRenderer->GetColor());
 		}
+	}
+
+	Camera* camera = nullptr;
+	for (const auto& entity : m_Entities)
+	{
+		if (entity->HasComponent<Camera>())
+		{
+			camera = entity->GetComponent<Camera>();
+		}
+	}
+
+	std::vector<Vector3f> sprite
+	{
+		{ 0.5f,  0.5f, 1.0f },
+		{ 0.5f, -0.5f, 1.0f },
+		{ -0.5f, 0.5f, 1.0f }
+	};
+
+	if (camera != nullptr)
+	{
+		for (auto& vertex : sprite)
+		{
+			//vertex = vertex * camera->GetProjectionMatrix();
+		}
+		//Engine::Get().GetWindow()->DrawVerticies(std > )
 	}
 }
 

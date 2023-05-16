@@ -7,7 +7,7 @@ void PixelPhysicsGrid::ResizeGrid()
 	m_Width = m_UpRightBorder.x - m_DownLeftBorder.x;
 	m_Height = m_UpRightBorder.y - m_DownLeftBorder.y;
 
-	m_PhysicsPixels.resize(m_Width * m_Height);
+	m_PhysicsPixels.resize(m_Width * m_Height, nullptr);
 }
 
 PixelPhysicsGrid::PixelPhysicsGrid(const Vector2i& downLeftBorder, const Vector2i& upRightBorder)
@@ -34,19 +34,36 @@ void PixelPhysicsGrid::Simulate()
 					while (abs(physicsPixel->velocity.y) >= 1.0f)
 					{
 						int sign = signbit(physicsPixel->velocity.y) ? 1.0f : -1.0f;
-						if (GetPixelPhysics(position.x, position.y + sign) != nullptr)
+						if (GetPixelPhysics(position.x, position.y - sign) != nullptr)
 						{
-							if (GetPixelPhysics(position.x - 1, position.y + sign) == nullptr)
+							if (GetPixelPhysics(position.x, position.y - 2 * sign) != nullptr)
 							{
-								position.x -= 1;
+								bool isLeftEmpty = GetPixelPhysics(position.x - 1, position.y - 2 * sign) == nullptr;
+								bool isRightEmpty = GetPixelPhysics(position.x + 1, position.y - 2 * sign) == nullptr;
+								
+								if(isLeftEmpty)
+								{
+									position.x -= 1;
+								}
+								else if(isRightEmpty && !isLeftEmpty)
+								{
+									position.x += 1;
+								}
+								else
+								{
+									physicsPixel->velocity.y = 0;
+								}
 							}
-							else if (GetPixelPhysics(position.x + 1, position.y + sign) == nullptr)
+							else
 							{
-								position.x += 1;
+								physicsPixel->velocity.y = 0;
 							}
 						}
-						position.y -= sign;
-						physicsPixel->velocity.y += sign;
+						else
+						{
+							position.y -= sign;
+							physicsPixel->velocity.y += sign;
+						}
 					}
 
 					/*while (abs(physicsPixel->velocity.x) >= 1.0f)
@@ -66,6 +83,7 @@ void PixelPhysicsGrid::Simulate()
 				}
 
 				pixelTransform->SetPosition(position);
+				m_PhysicsPixels[m_Width * y + x] = nullptr;
 				AddPhysicsPixel(physicsPixel);
 			}
 		}
@@ -107,7 +125,6 @@ PixelPhysics* PixelPhysicsGrid::GetPixelPhysics(int x, int y)
 	}
 
 	int position = m_Width * y + x;
-
 	return m_PhysicsPixels[position];
 }
 
@@ -120,7 +137,6 @@ const PixelPhysics* PixelPhysicsGrid::GetPixelPhysics(int x, int y) const
 	}
 
 	int position = m_Width * y + x;
-
 	return m_PhysicsPixels[position];
 }
 

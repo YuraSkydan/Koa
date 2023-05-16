@@ -16,8 +16,11 @@ void PixelPhysicsExample::OnUpdate()
 {
 	Window* window = Engine::Get().GetWindow();
 
-	if (Input::IsKeyPressed(Key::Space))
+	static bool isPressed = false;
+	if (Input::IsKeyPressed(Key::Space) && !isPressed)
 	{
+		isPressed = true;
+
 		Entity* newEntity = m_Scene->CreateEntity();
 		Transform* transform = newEntity->GetTransform();
 		transform->SetPosition({ 25, 25, 0 });
@@ -25,6 +28,10 @@ void PixelPhysicsExample::OnUpdate()
 		newEntity->AddComponent<PixelRenderer>();
 		PixelPhysics* physicsPixel = newEntity->AddComponent<PixelPhysics>();
 		m_Grid.AddPhysicsPixel(physicsPixel);
+	}
+	else if (Input::IsKeyReleased(Key::Space) && isPressed)
+	{
+		isPressed = false;
 	}
 
 	m_Grid.Simulate();
