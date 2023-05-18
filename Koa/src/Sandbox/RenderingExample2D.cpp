@@ -9,11 +9,11 @@ RenderingExample2D::RenderingExample2D()
 {
 	srand(time(0));
 
-	//Engine& instance = Engine::Get();
-	//m_Scene = instance.GetScene();
+	Engine& instance = Engine::Get();
+	m_Scene = instance.GetScene();
 
-	//m_Entity = m_Scene->CreateEntity();
-	//m_Entity->AddComponent<SpriteRenderer>();
+	m_Entity = m_Scene->CreateEntity();
+	m_Entity->AddComponent<SpriteRenderer>();
 }
 
 void RenderingExample2D::OnAttach()
@@ -23,7 +23,7 @@ void RenderingExample2D::OnAttach()
 
 void RenderingExample2D::OnUpdate()
 {
-	/*Vector3f scale = m_Entity->GetTransform()->GetScale();
+	Vector3f scale = m_Entity->GetTransform()->GetScale();
 	Vector3f eulerAngles = m_Entity->GetTransform()->GetEulerAngles();
 
 	if (GetAsyncKeyState(VK_RIGHT))
@@ -54,7 +54,7 @@ void RenderingExample2D::OnUpdate()
 	}
 
 	m_Entity->GetTransform()->SetEulerAngles(eulerAngles);
-	m_Entity->GetTransform()->SetScale(scale);*/
+	m_Entity->GetTransform()->SetScale(scale);
 
 	Window* window = Engine::Get().GetWindow();
 

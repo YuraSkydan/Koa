@@ -16,7 +16,9 @@ void Camera::RecalculateProjectionMatrix()
 
 Camera::Camera(Entity* owner)
 	: Component(owner)
-{ }
+{
+	RecalculateProjectionMatrix();
+}
 
 void Camera::SetProjectionType(ProjectionType type)
 {

@@ -16,6 +16,7 @@ private:
 	std::vector<Transform*> m_Childs;
 
 	Matrix4x4f m_TransformMatrix;
+	bool m_IsDirty = true;
 
 public:
 	Transform(Entity* owner);

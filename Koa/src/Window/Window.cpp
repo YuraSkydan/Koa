@@ -185,18 +185,17 @@ void Window::DrawVerticies(std::vector<Vector2f> verticies, Color color)
 
 void Window::DrawVerticies(const std::vector<Vector3f>& verticies, Color color)
 {
-	for (auto it = verticies.begin(), end = verticies.end() - 1; it != end; ++it)
+	std::vector<Vector2i> convertedVerticies;
+
+	for (auto& vertex : verticies)
 	{
-		DrawLine(*it, *(it + 1), color);
+		int x = (vertex.x * m_Width / 2.0f) + m_Width / 2.0f;
+		int y = (-vertex.y * m_Height / 2.0f) + m_Height / 2.0f;
+
+		convertedVerticies.emplace_back(Vector2i(x, y));
 	}
 
-	DrawLine(*(verticies.rbegin()), *(verticies.begin()), color);
-
-	Vector3f center;
-	for (auto it = verticies.cbegin(), end = verticies.cend(); it != end; ++it)
-	{
-		center += (*it) / 2.0f;
-	}
+	DrawTriangle(convertedVerticies, color);
 }
 
 void Window::DrawCircle(int x, int y, int radius, Color color)

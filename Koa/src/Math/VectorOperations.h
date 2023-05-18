@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector2.h"
 #include "Vector3.h"
+#include "Vector4.h"
 #include "Math.h"
 
 template<typename T>
@@ -13,26 +14,36 @@ inline Vector2<T>::Vector2(const Vector3<U>& other)
 
 template<typename T>
 template<typename U>
-inline Vector3<T>::Vector3(const Vector2<U>& other)
+inline Vector3<T>::Vector3(const Vector2<U>& other, T z)
 {
 	x = other.x;
 	y = other.y;
-	z = 0;
+	z = z;
+}
+
+template<typename T>
+template<typename U>
+inline Vector4<T>::Vector4(const Vector3<U>& other, T w)
+{
+	this->x = other.x;
+	this->y = other.y;
+	this->z = other.z;
+	this->w = w;
+}
+
+template<typename T>
+template<typename U>
+inline Vector4<T>::Vector4(const Vector2<U>& other, T z, T w)
+{
+	this->x = other.x;
+	this->y = other.y;
+	this->z = z;
+	this->w = w;
 }
 
 template<typename T>
 template<typename U>
 Vector2<T>& Vector2<T>::operator=(const Vector3<U>& v)
-{
-	x = v.x;
-	y = v.y;
-
-	return *this;
-}
-
-template<typename T>
-template<typename U>
-Vector3<T>& Vector3<T>::operator=(const Vector2<U>& v)
 {
 	x = v.x;
 	y = v.y;

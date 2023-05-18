@@ -7,10 +7,10 @@
 
 int main()
 {
-	Engine engine(50, 50, 10, 10, Engine::WindowContext::Console);
+	Engine engine(200, 200, 2, 2, Engine::WindowContext::Console);
 
-	//engine.AttachLayer(std::make_shared<RenderingExample2D>());
-	engine.AttachLayer(std::make_shared<RenderingExample3D>());
+	engine.AttachLayer(std::make_shared<RenderingExample2D>());
+	//engine.AttachLayer(std::make_shared<RenderingExample3D>());
 	//engine.AttachLayer(std::make_shared<PhysicsExample>());
 	//engine.AttachLayer(std::make_shared<RaytracerExample>());
 	//engine.AttachLayer(std::make_shared<PixelPhysicsExample>());

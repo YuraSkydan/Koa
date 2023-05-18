@@ -12,9 +12,9 @@ public:
 private:
 	ProjectionType m_Type = ProjectionType::Prespective;
 	float m_AspectRation = 1.0f;
-	float m_NearClip = 0.01f;
-	float m_FarClip = 1000.0f;
-	float m_Fov = 45.0f;
+	float m_NearClip = 0.1f;
+	float m_FarClip = 100.0f;
+	float m_Fov = 90.0f;
 	Matrix4x4f m_ProjectionMatrix;
 	//Color backgroundColor;
 	//LayerMask cullingMask;

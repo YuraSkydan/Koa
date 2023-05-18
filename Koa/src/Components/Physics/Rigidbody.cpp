@@ -49,7 +49,7 @@ void Rigidbody::FixedUpdate()
 	if (m_Body != nullptr)
 	{
 		b2Vec2 bodyPosition = m_Body->GetPosition();
-		GetTransform()->SetPosition(Vector2f{ bodyPosition.x, bodyPosition.y });
+		GetTransform()->SetPosition(Vector3f{ bodyPosition.x, bodyPosition.y, 0.0f });
 
 		Vector3f newAngles = GetTransform()->GetEulerAngles();
 		newAngles.z = ToDegrees(m_Body->GetAngle());

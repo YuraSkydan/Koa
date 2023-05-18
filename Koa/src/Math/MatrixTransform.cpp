@@ -1,15 +1,17 @@
 #include "MatrixTransform.h"
+#include "Math.h"
 
 Matrix4x4f MatrixTransform::PrespectiveMatrix(float fov, float aspectRatio, float nearClip, float farClip)
 {
 	Matrix4x4f prespective;
 
-	float tanHalfFOV = std::tan(fov / 2.0f);
+	float tanHalfFOV = std::tan(ToRadians(fov / 2.0f));
+	float range = farClip - nearClip;
 
 	prespective[0][0] = 1.0f / (aspectRatio * tanHalfFOV);
 	prespective[1][1] = 1.0f / tanHalfFOV;
-	prespective[2][2] = (nearClip + farClip) / (nearClip - farClip);
-	prespective[2][3] = (2.0f * nearClip * farClip) / (nearClip - farClip);
+	prespective[2][2] = -(farClip + nearClip) / range;
+	prespective[2][3] = -(2.0f * farClip * nearClip) / range;
 	prespective[3][2] = -1.0f;
 
 	return prespective;

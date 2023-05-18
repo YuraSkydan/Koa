@@ -7,16 +7,19 @@ Transform::Transform(Entity* owner)
 void Transform::SetPosition(const Vector3f& position)
 {
 	m_Position = position;
+	m_IsDirty = true;
 }
 
 void Transform::SetEulerAngles(const Vector3f& angles)
 {
 	m_EulerAngles = angles;
+	m_IsDirty = true;
 }
 
 void Transform::SetScale(const Vector3f& scale)
 {
 	m_Scale = scale;
+	m_IsDirty = true;
 }
 
 const Vector3f& Transform::GetPosition() const
@@ -36,7 +39,7 @@ const Vector3f& Transform::GetScale() const
 
 const Matrix4x4f& Transform::GetTransformMatrix()
 {
-	//if(m_IsDirty)
+	if(m_IsDirty)
 	{
 		m_TransformMatrix = Matrix4x4f(1.0f);
 		m_TransformMatrix = MatrixTransform::Translate(m_TransformMatrix, m_Position);

@@ -9,6 +9,7 @@
 #include "../Components/Transform.h"
 #include "../Components/Camera.h"
 #include "../Math/VectorOperations.h"
+#include "../Math/Vector4.h"
 
 Scene::Scene()
 	:m_Name("None")
@@ -74,9 +75,11 @@ void Scene::Render()
 			Matrix4x4f transformMatrix = m_Entities[i]->GetTransform()->GetTransformMatrix();
 			for (size_t j = 0; j < verticies.size(); j++)
 			{
-				verticies[j] = transformMatrix * Vector3f(verticies[j]);
-				verticies[j].x += transformMatrix[0][3];
-				verticies[j].y += transformMatrix[1][3];
+				//verticies[j] = transformMatrix * Vector3f(verticies[j]);
+				Vector4f vertex = transformMatrix * Vector4f(verticies[j], 0.0f, 1.0f);
+
+				verticies[j].x = vertex.x;
+				verticies[j].y = vertex.y;
 			}
 
 			Engine::Get().GetWindow()->DrawVerticies(std::vector<Vector2f>(verticies.begin(), verticies.begin() + 3), spriteRenderer->GetColor());
@@ -107,17 +110,25 @@ void Scene::Render()
 	std::vector<Vector3f> sprite
 	{
 		{ 0.5f,  0.5f, 1.0f },
-		{ 0.5f, -0.5f, 1.0f },
+		{ 0.5f, -0.5f, 5.0f },
 		{ -0.5f, 0.5f, 1.0f }
 	};
 
 	if (camera != nullptr)
 	{
-		for (auto& vertex : sprite)
+		const Matrix4x4f& projection = camera->GetProjectionMatrix();
+		for (auto& v : sprite)
 		{
-			//vertex = vertex * camera->GetProjectionMatrix();
+			Vector4f vertex = Vector4f(v, 1.0f) * projection;
+			
+			vertex /= vertex.w;
+
+			v.x = vertex.x;
+			v.y = vertex.y;
+			v.z = vertex.z;
 		}
-		//Engine::Get().GetWindow()->DrawVerticies(std > )
+
+		Engine::Get().GetWindow()->DrawVerticies(sprite, Color::White);
 	}
 }
 

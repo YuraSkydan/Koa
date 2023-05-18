@@ -25,10 +25,7 @@ struct Vector3
 	Vector3(const Vector3<U>& other);
 
 	template<typename U>
-	Vector3(const Vector2<U>& other);
-
-	template<typename U>
-	Vector3<T>& operator=(const Vector2<U>& v);
+	Vector3(const Vector2<U>& other, T z);
 
 	template<typename U>
 	Vector3<T>& operator=(const Vector3<U>& v);

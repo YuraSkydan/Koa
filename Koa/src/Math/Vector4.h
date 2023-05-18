@@ -5,6 +5,9 @@ template<typename T>
 struct Vector2;
 
 template<typename T>
+struct Vector3;
+
+template<typename T>
 struct Vector4
 {
 	T x, y, z, w;
@@ -17,16 +20,10 @@ struct Vector4
 	Vector4(const Vector4<U>& other);
 
 	template<typename U>
-	Vector4(const Vector3<U>& other);
+	Vector4(const Vector3<U>& other, T w);
 
 	template<typename U>
-	Vector4(const Vector2<U>& other);
-
-	template<typename U>
-	Vector4<T>& operator=(const Vector2<U>& v);
-
-	template<typename U>
-	Vector4<T>& operator=(const Vector3<U>& v);
+	Vector4(const Vector2<U>& other, T z, T w);
 
 	template<typename U>
 	Vector4<T>& operator=(const Vector4<U>& v);
