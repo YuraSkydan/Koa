@@ -4,6 +4,16 @@
 #include "ConsoleWindow.h"
 #include "../Math/VectorOperations.h"
 
+float Window::ConvertToWindowX(float x)
+{
+	return (x * m_Width / 2.0f) + (m_Width / 2.0f);
+}
+
+float Window::ConvertToWindowY(float y)
+{
+	return (-y * m_Height / 2.0f) + (m_Height / 2.0f);
+}
+
 Window::Window(int width, int height)
 	: m_Width(width), m_Height(height)
 { }
@@ -15,8 +25,8 @@ void Window::Update()
 
 void Window::SetPixel(float x, float y, Color color)
 {
-	int pixelX = (x * m_Width / 2.0f) + m_Width / 2.0f;
-	int pixelY = (-y * m_Height / 2.0f) + m_Height / 2.0f;
+	int pixelX = ConvertToWindowX(x);
+	int pixelY = ConvertToWindowY(y);
 
 	SetPixel(pixelX, pixelY, color);
 }
@@ -106,11 +116,7 @@ void Window::DrawLine(const Vector2f& v0, const Vector2f& v1, Color color)
 	DrawLine(v0.x, v0.y, v1.x, v1.y, color);
 }
 
-void Window::DrawTriangle(Vector2i verticies[3], Color color)
-{
-}
-
-void Window::DrawTriangle(std::vector<Vector2i> verticies, Color color)
+void Window::DrawTriangle(std::span<Vector2i> verticies, const Color& color)
 {
 	std::sort(verticies.begin(), verticies.end(),
 		[](const Vector2i& v1, const Vector2i& v2)
@@ -158,44 +164,31 @@ void Window::DrawTriangle(std::vector<Vector2i> verticies, Color color)
 	}
 }
 
-void Window::DrawVerticies(std::vector<Vector2f> verticies, Color color)
+void Window::DrawVerticies(std::span<Vector2f> verticies, const Color& color)
 {
-	//DrawLine(verticies[0], verticies[1], color);
-	//DrawLine(verticies[1], verticies[2], color);
-	//DrawLine(verticies[2], verticies[0], color);
 
-	std::vector<Vector2i> convertedVerticies;
-
-	for (auto& vertex : verticies)
-	{
-		int x = (vertex.x * m_Width / 2.0f) + m_Width / 2.0f;
-		int y = (-vertex.y * m_Height / 2.0f) + m_Height / 2.0f;
-
-		convertedVerticies.emplace_back(Vector2i(x, y));
-	}
-
-	DrawTriangle(convertedVerticies, color);
-
-	//Vector2f center;
-	//for (auto& vertex : verticies)
-	//{
-	//	center += vertex / 2.0f;
-	//}
 }
 
-void Window::DrawVerticies(const std::vector<Vector3f>& verticies, Color color)
+void Window::DrawVerticies(std::span<Vector3f> verticies, const Color& color)
 {
-	std::vector<Vector2i> convertedVerticies;
+	std::vector<Vector2i> converted(verticies.size());
+	auto it = converted.begin();
 
-	for (auto& vertex : verticies)
+	for (auto& v : verticies)
 	{
-		int x = (vertex.x * m_Width / 2.0f) + m_Width / 2.0f;
-		int y = (-vertex.y * m_Height / 2.0f) + m_Height / 2.0f;
-
-		convertedVerticies.emplace_back(Vector2i(x, y));
+		int x = ConvertToWindowX(v.x);
+		int y = ConvertToWindowY(v.y);
+	
+		*it = Vector2i(x, y);
+		it++;
 	}
 
-	DrawTriangle(convertedVerticies, color);
+	DrawTriangle(converted, color);
+}
+
+void Window::DrawVerticies(const std::vector<Vector2f>& verticies, const Color& color)
+{
+
 }
 
 void Window::DrawCircle(int x, int y, int radius, Color color)

@@ -1,9 +1,10 @@
 #include "Camera.h"
+#include "Transform.h"
 #include "../Math/MatrixTransform.h"
 
 void Camera::RecalculateProjectionMatrix()
 {
-	switch (m_Type)
+	switch (m_ProjectionType)
 	{
 	case ProjectionType::Prespective:
 		m_ProjectionMatrix = MatrixTransform::PrespectiveMatrix(m_Fov, m_AspectRation, m_NearClip, m_FarClip);
@@ -22,7 +23,7 @@ Camera::Camera(Entity* owner)
 
 void Camera::SetProjectionType(ProjectionType type)
 {
-	m_Type = type;
+	m_ProjectionType = type;
 	RecalculateProjectionMatrix();
 }
 
@@ -44,12 +45,37 @@ void Camera::SetFarClip(float farClip)
 	RecalculateProjectionMatrix();
 }
 
+Camera::ProjectionType Camera::GetProjectionType() const
+{
+	return m_ProjectionType;
+}
+
 float Camera::GetAspectRation() const
 {
 	return m_AspectRation;
 }
 
+float Camera::GetNearClip() const
+{
+	return m_NearClip;
+}
+
+float Camera::GetFarClip() const
+{
+	return m_FarClip;
+}
+
+float Camera::GetFov() const
+{
+	return m_Fov;
+}
+
 const Matrix4x4f& Camera::GetProjectionMatrix() const
 {
 	return m_ProjectionMatrix;
+}
+
+Matrix4x4f Camera::GetViewProjectionMatrix() const
+{
+	return m_ProjectionMatrix * m_Transform->GetTransformMatrix();
 }

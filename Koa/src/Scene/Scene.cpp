@@ -1,3 +1,5 @@
+#include <array>
+
 #include "Scene.h"
 
 //Remove later
@@ -8,12 +10,13 @@
 #include "../Components/Renderers/PixelRenderer.h"
 #include "../Components/Transform.h"
 #include "../Components/Camera.h"
+#include "../Components/Mesh.h"
 #include "../Math/VectorOperations.h"
 #include "../Math/Vector4.h"
 
 Scene::Scene()
 	:m_Name("None")
-{ 
+{
 }
 
 void Scene::Start()
@@ -109,26 +112,48 @@ void Scene::Render()
 
 	std::vector<Vector3f> sprite
 	{
-		{ 0.5f,  0.5f, 1.0f },
-		{ 0.5f, -0.5f, 5.0f },
-		{ -0.5f, 0.5f, 1.0f }
+		{ 0.5f,  0.5f, 10.0f },
+		{ 0.5f, -0.5f, 10.0f },
+		{ -0.5f, 0.5f, 10.0f }
 	};
 
 	if (camera != nullptr)
 	{
 		const Matrix4x4f& projection = camera->GetProjectionMatrix();
-		for (auto& v : sprite)
+
+		for (auto& entity : m_Entities)
 		{
-			Vector4f vertex = Vector4f(v, 1.0f) * projection;
-			
-			vertex /= vertex.w;
+			if (entity->HasComponent<Mesh>())
+			{
+				Mesh* mesh = entity->GetComponent<Mesh>();
+				const std::vector<Vector3f>& meshVerticies = mesh->GetMeshVerticies();
 
-			v.x = vertex.x;
-			v.y = vertex.y;
-			v.z = vertex.z;
+				std::array<Vector3f, 3> polygon;
+				auto it = polygon.begin();
+				for (auto& v : meshVerticies)
+				{
+					Matrix4x4f meshMatrix = mesh->GetTransform()->GetTransformMatrix();
+					Vector4f r1 = projection * meshMatrix * Vector4f(v, 1.0f);
+					Vector4f r = r1;
+
+					if (r.w != 0)
+					{
+						r /= r.w;
+					}
+
+					it->x = r.x;
+					it->y = r.y;
+					it->z = r.z;
+
+					it++;
+					if (it == polygon.end())
+					{
+						it = polygon.begin();
+						Engine::Get().GetWindow()->DrawVerticies(polygon, Color::White);
+					}
+				}
+			}
 		}
-
-		Engine::Get().GetWindow()->DrawVerticies(sprite, Color::White);
 	}
 }
 

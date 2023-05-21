@@ -103,14 +103,21 @@ namespace MatrixTransform
 	{
 		Matrix<T, 4> rotated = m;
 
-		float cosValue = cos(v.z * (std::numbers::pi / 180.0f));
-		float sinValue = sin(v.z * (std::numbers::pi / 180.0f));
+		float cosValue = cos(v.y * (std::numbers::pi / 180.0f));
+		float sinValue = sin(v.y * (std::numbers::pi / 180.0f));
 
-		rotated[0][0] = m[0][0] * cosValue - m[1][0] * sinValue;
-		rotated[0][1] = m[0][1] * cosValue - m[1][1] * sinValue;
+		//rotated[0][0] = m[0][0] * cosValue - m[1][0] * sinValue;
+		//rotated[0][1] = m[0][1] * cosValue - m[1][1] * sinValue;
 
-		rotated[1][0] = m[0][0] * sinValue + m[1][0] * cosValue;
-		rotated[1][1] = m[0][1] * sinValue + m[1][1] * cosValue;
+		//rotated[1][0] = m[0][0] * sinValue + m[1][0] * cosValue;
+		//rotated[1][1] = m[0][1] * sinValue + m[1][1] * cosValue;
+
+
+		rotated[1][1] = m[1][1] * cosValue - m[2][1] * sinValue;
+		rotated[1][2] = m[1][2] * cosValue - m[2][2] * sinValue;
+
+		rotated[2][1] = m[1][1] * sinValue + m[2][1] * cosValue;
+		rotated[2][2] = m[1][2] * sinValue + m[2][2] * cosValue;
 
 		return rotated;
 	}

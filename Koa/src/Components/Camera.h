@@ -10,7 +10,7 @@ public:
 	enum class ProjectionType { Prespective = 0, Orthographic = 1 };
 
 private:
-	ProjectionType m_Type = ProjectionType::Prespective;
+	ProjectionType m_ProjectionType = ProjectionType::Prespective;
 	float m_AspectRation = 1.0f;
 	float m_NearClip = 0.1f;
 	float m_FarClip = 100.0f;
@@ -29,7 +29,13 @@ public:
 	void SetRatio(float aspectRation);
 	void SetNearClip(float nearClip);
 	void SetFarClip(float farClip);
-	float GetAspectRation() const;
 	
+	ProjectionType GetProjectionType() const;
+	float GetAspectRation() const;
+	float GetNearClip() const;
+	float GetFarClip() const;
+	float GetFov() const;
+
 	const Matrix4x4f& GetProjectionMatrix() const;
+	Matrix4x4f GetViewProjectionMatrix() const;
 };

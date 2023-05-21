@@ -17,4 +17,7 @@ public:
 
 	void LoadMesh(std::string_view filename);
 	void UnloadMesh();
+
+	const std::string& GetMeshFilename() const;
+	const std::vector<Vector3f>& GetMeshVerticies() const;
 };
