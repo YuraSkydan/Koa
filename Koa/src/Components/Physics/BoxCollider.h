@@ -18,5 +18,5 @@ public:
 	void Reset() override;
 
 	void SetSize(const Vector2f& size);
-	const Vector2f& GetSize() const { return m_Size; }
+	const Vector2f& GetSize() const;
 };

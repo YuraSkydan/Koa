@@ -45,6 +45,13 @@ void Camera::SetFarClip(float farClip)
 	RecalculateProjectionMatrix();
 }
 
+Ray Camera::GetRay(double u, double v) const
+{
+	//Vector3f origin = m_Transform->GetPosition();
+	//return Ray(origin,  )
+	return Ray();
+}
+
 Camera::ProjectionType Camera::GetProjectionType() const
 {
 	return m_ProjectionType;

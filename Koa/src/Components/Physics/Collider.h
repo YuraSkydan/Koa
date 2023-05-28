@@ -1,7 +1,7 @@
 #pragma once
 #include "Collision.h"
 #include "Trigger.h"
-#include "Material.h"
+#include "PhysicsMaterial.h"
 #include "box2d/b2_fixture.h"
 #include "../../Math/Vector2.h"
 

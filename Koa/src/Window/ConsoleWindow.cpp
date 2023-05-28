@@ -1,5 +1,6 @@
 #include <cstring>
 #include <algorithm>
+#include <thread>
 
 #include "ConsoleWindow.h"
 #include "../Math/VectorOperations.h"
@@ -86,7 +87,7 @@ void ConsoleWindow::Clear()
 	memset(m_Buffers[m_CurrentBufferIndex].data(), 0, m_Buffers[m_CurrentBufferIndex].size() * sizeof(CHAR_INFO));
 }
 
-void ConsoleWindow::ClearColor(Color color)
+void ConsoleWindow::ClearColor(const Color& color)
 {
 	for (auto it = m_Buffers[m_NextBufferIndex].begin(), end = m_Buffers[m_NextBufferIndex].end(); it != end; ++it)
 	{
@@ -163,7 +164,7 @@ void ConsoleWindow::Draw()
 #endif
 }
 
-void ConsoleWindow::SetPixel(int x, int y, Color color)
+void ConsoleWindow::SetPixel(int x, int y, const Color& color)
 {
 	if (x < 0 || y < 0 || x >= m_ConsoleBufferSize.X || y >= m_ConsoleBufferSize.Y)
 	{
@@ -265,9 +266,13 @@ void ConsoleWindow::SetTitle(const wchar_t* title)
 	SetConsoleTitleW(title);
 }
 
-Pixel ConsoleWindow::GetPixel(int x, int y)
+const Color& ConsoleWindow::GetColor(int x, int y)
 {
-	return Pixel();
+	int position;
+	//m_Buffers[m_CurrentBufferIndex][position].Char.UnicodeChar = GetShadeCharacter(color.GetConsoleColorShade());
+	//m_Buffers[m_CurrentBufferIndex][position].Attributes = WORD(color.GetConsoleColor());
+	
+	return Color();
 }
 
 const SMALL_RECT& ConsoleWindow::GetConsoleWindowSize() const

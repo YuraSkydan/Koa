@@ -243,7 +243,7 @@ inline Vector2<T> operator-(const Vector2<T>& v)
 
 #pragma region BinaryOperators
 template<typename T>
-inline Vector2<T> operator+(const Vector2<T>& v1, const Vector2<U>& v2)
+inline Vector2<T> operator+(const Vector2<T>& v1, const Vector2<T>& v2)
 {
 	return Vector2<T>(v1.x + v2.x, v1.y + v2.y);
 }

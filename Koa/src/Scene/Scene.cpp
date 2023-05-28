@@ -125,31 +125,66 @@ void Scene::Render()
 		{
 			if (entity->HasComponent<Mesh>())
 			{
+				{
+			/*		Mesh* mesh = entity->GetComponent<Mesh>();
+					const std::vector<Vector3f>& meshVerticies = mesh->GetMeshVerticies();
+
+					std::array<Vector3f, 3> polygon;
+					auto it = polygon.begin();
+					for (auto& v : meshVerticies)
+					{
+						Matrix4x4f meshMatrix = mesh->GetTransform()->GetTransformMatrix();
+						Vector4f r1 = projection * meshMatrix * Vector4f(v, 1.0f);
+						Vector4f r = r1;
+
+						if (r.w != 0)
+						{
+							r /= r.w;
+						}
+
+						it->x = r.x;
+						it->y = r.y;
+						it->z = r.z;
+
+						it++;
+						if (it == polygon.end())
+						{
+							Engine::Get().GetWindow()->DrawVerticies(polygon, Color::White);
+							it = polygon.begin();
+						}
+					}*/
+				}
+
 				Mesh* mesh = entity->GetComponent<Mesh>();
 				const std::vector<Vector3f>& meshVerticies = mesh->GetMeshVerticies();
 
 				std::array<Vector3f, 3> polygon;
 				auto it = polygon.begin();
-				for (auto& v : meshVerticies)
+				for(int i = 0; i < mesh->GetFacesAmount(); i++)
 				{
-					Matrix4x4f meshMatrix = mesh->GetTransform()->GetTransformMatrix();
-					Vector4f r1 = projection * meshMatrix * Vector4f(v, 1.0f);
-					Vector4f r = r1;
-
-					if (r.w != 0)
+					auto face = mesh->GetFace(i);
+					for (int vIndex : face)
 					{
-						r /= r.w;
-					}
+						Vector3f v = mesh->GetVertex(vIndex);
+						Matrix4x4f meshMatrix = mesh->GetTransform()->GetTransformMatrix();
+						Vector4f r1 = projection * meshMatrix * Vector4f(v, 1.0f);
+						Vector4f r = r1;
 
-					it->x = r.x;
-					it->y = r.y;
-					it->z = r.z;
+						if (r.w != 0)
+						{
+							r /= r.w;
+						}
 
-					it++;
-					if (it == polygon.end())
-					{
-						it = polygon.begin();
-						Engine::Get().GetWindow()->DrawVerticies(polygon, Color::White);
+						it->x = r.x;
+						it->y = r.y;
+						it->z = r.z;
+
+						it++;
+						if (it == polygon.end())
+						{
+							Engine::Get().GetWindow()->DrawVerticies(polygon, rand() % 16);
+							it = polygon.begin();
+						}
 					}
 				}
 			}

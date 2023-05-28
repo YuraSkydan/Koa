@@ -97,13 +97,13 @@ void RenderingExample2D::OnUpdate()
 	//window->DrawLine(t1[1], t1[2], Color::Green);
 	//window->DrawLine(t1[2], t1[0], Color::Green);
 	
-	//window->DrawLine(t2[0], t2[1], Color::Red);
-	//window->DrawLine(t2[1], t2[2], Color::Red);
-	//window->DrawLine(t2[2], t2[0], Color::Red);
+	window->DrawLine(t2[0], t2[1], Color::Red);
+	window->DrawLine(t2[1], t2[2], Color::Red);
+	window->DrawLine(t2[2], t2[0], Color::Red);
 	
-	window->DrawVerticies(t0, Color::White);
-	window->DrawVerticies(t1, Color::Green);
-	window->DrawVerticies(t2, Color::Red);
-	window->DrawVerticies(std::vector<Vector2f>(square.begin(), square.begin() + 3), Color::Blue);
-	window->DrawVerticies(std::vector<Vector2f>(square.begin() + 3, square.end()), Color::Blue);
+	//window->DrawVerticies(t0, Color::White);
+	//window->DrawVerticies(t1, Color::Green);
+	//window->DrawVerticies(t2, Color::Red);
+	//window->DrawVerticies(std::vector<Vector2f>(square.begin(), square.begin() + 3), Color::Blue);
+	//window->DrawVerticies(std::vector<Vector2f>(square.begin() + 3, square.end()), Color::Blue);
 }

@@ -9,8 +9,8 @@ class Scene
 {	
 private:
 	std::string m_Name;
-	
 	std::vector<std::unique_ptr<Entity>> m_Entities;
+
 public:
 	Scene();
 

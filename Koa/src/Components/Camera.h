@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "../Math/Matrix.h"
+#include "../Raytracing/Ray.h"
 //#include "../Scene/LayerMask.h"
 //#include "SpriteRenderer.h"
 
@@ -30,6 +31,7 @@ public:
 	void SetNearClip(float nearClip);
 	void SetFarClip(float farClip);
 	
+	Ray GetRay(double u, double v) const;
 	ProjectionType GetProjectionType() const;
 	float GetAspectRation() const;
 	float GetNearClip() const;

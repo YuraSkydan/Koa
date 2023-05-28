@@ -2,8 +2,6 @@
 #include "box2d/b2_circle_shape.h"
 #include "Collider.h"
 
-class b2CircleShape;
-
 class KOA_API CircleCollider : public Collider
 {
 private:

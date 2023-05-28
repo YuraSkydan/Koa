@@ -57,7 +57,7 @@
     <ClInclude Include="src\Components\Renderers\LineRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Components\Physics\Material.h">
+    <ClInclude Include="src\Components\Physics\PhysicsMaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Components\Renderers\PixelRenderer.h">
@@ -243,7 +243,7 @@
     <ClInclude Include="src\Sandbox\RenderingExample2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer.h">
+    <ClInclude Include="src\Core\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Components\Renderers\SpriteRenderer.h">
@@ -253,9 +253,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Math\VectorOperations.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Window\Pixel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Math\Math.h">
@@ -301,6 +298,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Math\Vector4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -392,7 +392,7 @@
     <ClCompile Include="src\Sandbox\RenderingExample2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer.cpp">
+    <ClCompile Include="src\Core\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Components\Renderers\SpriteRenderer.cpp">
@@ -441,6 +441,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Math\MatrixTransform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

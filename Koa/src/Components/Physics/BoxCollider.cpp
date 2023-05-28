@@ -42,3 +42,8 @@ void BoxCollider::SetSize(const Vector2f& size)
 		m_Body->CreateFixture(&m_FixtureDef);
 	}
 }
+
+const Vector2f& BoxCollider::GetSize() const
+{
+	return m_Size;
+}

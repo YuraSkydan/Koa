@@ -22,21 +22,18 @@ public:
 
 	void Update() override;
 	void Clear() override;
-	void ClearColor(Color color) override { }
+	void ClearColor(const Color& color) override { }
 	void Draw() override { };
 
-	void SetPixel(int x, int y, Color color) override;
+	void SetPixel(int x, int y, const Color& color) override;
 	 
 	void SetTitle(const wchar_t* title) override;
 
-	Pixel GetPixel(int x, int y) override { return Pixel(); };
-	Pixel GetPixel(float x, float y) override { return Pixel(); };
-	Pixel GetPixel(const Vector2f& v) override{ return Pixel(); };
+	const Color& GetColor(int x, int y) override { return Color(); };
+	const Color& GetColor(float x, float y) override { return Color(); };
+	const Color& GetColor(const Vector2f& v) override{ return Color(); };
 
-	const wchar_t* GetTitle() const override
-	{
-		return nullptr;
-	};
+	const wchar_t* GetTitle() const override;
 
 	~WindowsWindow() override;
 };

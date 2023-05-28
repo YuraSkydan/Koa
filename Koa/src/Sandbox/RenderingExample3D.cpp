@@ -15,8 +15,11 @@ RenderingExample3D::RenderingExample3D()
 	camera->AddComponent<Camera>();
 
 	m_Mesh = m_Scene->CreateEntity();
-	m_Mesh->AddComponent<Mesh>();
+	Mesh* component = m_Mesh->AddComponent<Mesh>();
+	component->LoadMesh("Resources/african_head.obj");
 
+	Transform* transform = m_Mesh->GetTransform();
+	transform->SetPosition(Vector3f(0, 0, 0));
 	//Entity* newEntity = m_Scene->CreateEntity();
 	//newEntity->AddComponent<SpriteRenderer>();
 	//newEntity->AddComponent<Mesh>();

@@ -88,7 +88,7 @@ void WindowsWindow::Clear()
 	memset(m_PixelBuffer.data(), 0, sizeof(COLORREF) * m_PixelBuffer.size());
 }
 
-void WindowsWindow::SetPixel(int x, int y, Color color) 
+void WindowsWindow::SetPixel(int x, int y, const Color& color) 
 {
 	if (x < 0 || y < 0 || x >= m_Width || y >= m_Height)
 	{
@@ -105,6 +105,14 @@ void WindowsWindow::SetPixel(int x, int y, Color color)
 void WindowsWindow::SetTitle(const wchar_t* title)
 {
 	SetWindowText(m_HWindow, title);
+}
+
+
+
+const wchar_t* WindowsWindow::GetTitle() const
+{
+	//GetWindowText(m_HWindow);
+	return nullptr;
 }
 
 WindowsWindow::~WindowsWindow() 
