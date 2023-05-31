@@ -1,8 +1,10 @@
 #include "RenderingExample2D.h"
 #include "../Core/Engine.h"
 #include "../Core/Time.h"
+#include "../Core/Input.h"
 #include "../Components/Transform.h"
 #include "../Components/Renderers/SpriteRenderer.h"
+#include "../Components/Renderers/LineRenderer.h"
 #include "../Components/Renderers/PixelRenderer.h"
 
 RenderingExample2D::RenderingExample2D()
@@ -14,6 +16,7 @@ RenderingExample2D::RenderingExample2D()
 
 	m_Entity = m_Scene->CreateEntity();
 	m_Entity->AddComponent<SpriteRenderer>();
+	//m_Entity->AddComponent<LineRenderer>();
 }
 
 void RenderingExample2D::OnAttach()
@@ -26,35 +29,33 @@ void RenderingExample2D::OnUpdate()
 	Vector3f scale = m_Entity->GetTransform()->GetScale();
 	Vector3f eulerAngles = m_Entity->GetTransform()->GetEulerAngles();
 
-	if (GetAsyncKeyState(VK_RIGHT))
+	Transform* transform = m_Entity->GetTransform();
+	Vector3f position = transform->GetPosition();
+	Vector3f angles = transform->GetEulerAngles();
+
+	if (Input::IsKeyPressed(Key::D))
 	{
-		scale.x += 1.0f * Time::DeltaTime();
+		position.x += Time::DeltaTime();
 	}
-	else if (GetAsyncKeyState(VK_LEFT))
+	if (Input::IsKeyPressed(Key::A))
 	{
-		scale.x -= 1.0f * Time::DeltaTime();
+		position.x -= Time::DeltaTime();
+	}
+	if (Input::IsKeyPressed(Key::W))
+	{
+		position.y += Time::DeltaTime();
+	}
+	if (Input::IsKeyPressed(Key::S))
+	{
+		position.y -= Time::DeltaTime();
+	}
+	if (Input::IsKeyPressed(Key::Space))
+	{
+		angles.y += Time::DeltaTime() * 100;
 	}
 
-	if (GetAsyncKeyState(VK_UP))
-	{
-		scale.y += 1.0f * Time::DeltaTime();
-	}
-	else if (GetAsyncKeyState(VK_DOWN))
-	{
-		scale.y -= 1.0f * Time::DeltaTime();
-	}
-
-	if (GetAsyncKeyState(0x41))
-	{
-		eulerAngles.z += 50.0f * Time::DeltaTime();
-	}
-	else if(GetAsyncKeyState(0x44))
- 	{
-		eulerAngles.z -= 50.0f * Time::DeltaTime();
-	}
-
-	m_Entity->GetTransform()->SetEulerAngles(eulerAngles);
-	m_Entity->GetTransform()->SetScale(scale);
+	transform->SetPosition(position);
+	transform->SetEulerAngles(angles);
 
 	Window* window = Engine::Get().GetWindow();
 

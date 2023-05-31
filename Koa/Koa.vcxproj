@@ -135,7 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.h" />
+    <ClInclude Include="src\Renderer\Shader.h" />
     <ClInclude Include="src\Math\Vector4.h" />
     <ClInclude Include="src\Sandbox\RenderingExample3D.h" />
     <ClInclude Include="src\Components\Mesh.h" />
@@ -148,7 +148,7 @@
     <ClInclude Include="src\Raytracing\Metal.h" />
     <ClInclude Include="src\Raytracing\Lambertian.h" />
     <ClInclude Include="src\Raytracing\Material.h" />
-    <ClInclude Include="src\Core\Renderer.h" />
+    <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Components\Renderers\SpriteRenderer.h" />
     <ClInclude Include="src\Math\Math.h" />
     <ClInclude Include="src\Math\MatrixTransform.h" />
@@ -233,7 +233,7 @@
     <ClInclude Include="src\Window\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="src\Renderer\Shader.cpp" />
     <ClCompile Include="src\Math\MatrixTransform.cpp" />
     <ClCompile Include="src\Sandbox\RenderingExample3D.cpp" />
     <ClCompile Include="src\Components\Mesh.cpp" />
@@ -243,7 +243,7 @@
     <ClCompile Include="src\Window\OpenGLWindow.cpp" />
     <ClCompile Include="src\Raytracing\Metal.cpp" />
     <ClCompile Include="src\Raytracing\Lambertian.cpp" />
-    <ClCompile Include="src\Core\Renderer.cpp" />
+    <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Components\Renderers\SpriteRenderer.cpp" />
     <ClCompile Include="src\Raytracing\HitRecord.cpp" />
     <ClCompile Include="src\Math\Math.cpp" />

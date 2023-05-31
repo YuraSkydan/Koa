@@ -7,12 +7,15 @@
 #include "../Core/Time.h"
 #include "../Physics/PhysicsWorld.h"
 #include "../Components/Renderers/SpriteRenderer.h"
+#include "../Components/Renderers/CircleRenderer.h"
+#include "../Components/Renderers/LineRenderer.h"
 #include "../Components/Renderers/PixelRenderer.h"
 #include "../Components/Transform.h"
 #include "../Components/Camera.h"
 #include "../Components/Mesh.h"
 #include "../Math/VectorOperations.h"
 #include "../Math/Vector4.h"
+#include "../Renderer/Renderer.h"
 
 Scene::Scene()
 	:m_Name("None")
@@ -56,6 +59,96 @@ void Scene::Update()
 
 void Scene::Render()
 {
+	Camera* renderCamera = nullptr;
+	for (const auto& entity : m_Entities)
+	{
+		if (entity->IsActive())
+		{
+			Camera* camera = entity->GetComponent<Camera>();
+			if (camera != nullptr && camera->IsEnabled())
+			{
+				renderCamera = camera;
+			}
+		}
+	}
+
+	Renderer::StartRendering(renderCamera);
+
+	//Rendering sprites
+	for (const auto& renderer : m_SpriteRenderers)
+	{
+		const Entity* owner = renderer->GetOwner();
+		if (owner->IsActive())
+		{
+			if (renderer->IsEnabled())
+			{
+				Renderer::DrawSprite(renderer);
+			}
+		}
+	}
+
+	//Rendering circles
+	for (const auto& renderer : m_CircleRenderers)
+	{
+		const Entity* owner = renderer->GetOwner();
+		if (owner->IsActive())
+		{
+			if (renderer->IsEnabled())
+			{
+				Renderer::DrawCircle(renderer);
+			}
+		}
+	}
+
+	//Rendering lines
+	for (const auto& renderer : m_LineRenderers)
+	{
+		const Entity* owner = renderer->GetOwner();
+		if (owner->IsActive())
+		{
+			if (renderer->IsEnabled())
+			{
+				Renderer::DrawLine(renderer);
+			}
+		}
+	}
+
+	//Rendering pixels
+	for (const auto& renderer : m_PixelRenderers)
+	{
+		const Entity* owner = renderer->GetOwner();
+		if (owner->IsActive())
+		{
+			if (renderer->IsEnabled())
+			{
+				Renderer::DrawPixel(renderer);
+			}
+		}
+	}
+
+	//Rendering meshes
+	for (const auto& mesh : m_Meshes)
+	{
+		const Entity* owner = mesh->GetOwner();
+		if (owner->IsActive())
+		{
+			if (mesh->IsEnabled())
+			{
+				Renderer::DrawMesh(mesh);
+			}
+		}
+	}
+
+	//Remove later
+	for (const auto& entity : m_Entities)
+	{
+		const LineRenderer* renderer = entity->GetComponent<LineRenderer>();
+		if (renderer != nullptr)
+		{
+			Renderer::DrawLine(renderer);
+		}
+	}
+
 	std::vector<Vector2f> square
 	{
 		{ -0.5f, -0.5f },
@@ -101,91 +194,16 @@ void Scene::Render()
 		}
 	}
 
-	Camera* camera = nullptr;
-	for (const auto& entity : m_Entities)
+	if (renderCamera != nullptr)
 	{
-		if (entity->HasComponent<Camera>())
+		for (const auto& entity : m_Entities)
 		{
-			camera = entity->GetComponent<Camera>();
-		}
-	}
-
-	std::vector<Vector3f> sprite
-	{
-		{ 0.5f,  0.5f, 10.0f },
-		{ 0.5f, -0.5f, 10.0f },
-		{ -0.5f, 0.5f, 10.0f }
-	};
-
-	if (camera != nullptr)
-	{
-		const Matrix4x4f& projection = camera->GetProjectionMatrix();
-
-		for (auto& entity : m_Entities)
-		{
-			if (entity->HasComponent<Mesh>())
+			if (entity->IsActive())
 			{
-				{
-			/*		Mesh* mesh = entity->GetComponent<Mesh>();
-					const std::vector<Vector3f>& meshVerticies = mesh->GetMeshVerticies();
-
-					std::array<Vector3f, 3> polygon;
-					auto it = polygon.begin();
-					for (auto& v : meshVerticies)
-					{
-						Matrix4x4f meshMatrix = mesh->GetTransform()->GetTransformMatrix();
-						Vector4f r1 = projection * meshMatrix * Vector4f(v, 1.0f);
-						Vector4f r = r1;
-
-						if (r.w != 0)
-						{
-							r /= r.w;
-						}
-
-						it->x = r.x;
-						it->y = r.y;
-						it->z = r.z;
-
-						it++;
-						if (it == polygon.end())
-						{
-							Engine::Get().GetWindow()->DrawVerticies(polygon, Color::White);
-							it = polygon.begin();
-						}
-					}*/
-				}
-
 				Mesh* mesh = entity->GetComponent<Mesh>();
-				const std::vector<Vector3f>& meshVerticies = mesh->GetMeshVerticies();
-
-				std::array<Vector3f, 3> polygon;
-				auto it = polygon.begin();
-				for(int i = 0; i < mesh->GetFacesAmount(); i++)
+				if (mesh != nullptr && mesh->IsEnabled())
 				{
-					auto face = mesh->GetFace(i);
-					for (int vIndex : face)
-					{
-						Vector3f v = mesh->GetVertex(vIndex);
-						Matrix4x4f meshMatrix = mesh->GetTransform()->GetTransformMatrix();
-						Vector4f r1 = projection * meshMatrix * Vector4f(v, 1.0f);
-						Vector4f r = r1;
-
-						if (r.w != 0)
-						{
-							r /= r.w;
-						}
-
-						it->x = r.x;
-						it->y = r.y;
-						it->z = r.z;
-
-						it++;
-						if (it == polygon.end())
-						{
-							Engine::Get().GetWindow()->DrawVerticies(polygon, rand() % 16);
-							it = polygon.begin();
-						}
-					}
+					Renderer::DrawMesh(mesh);
 				}
 			}
 		}

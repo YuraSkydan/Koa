@@ -5,6 +5,7 @@
 #include "Time.h"
 
 #include "../Window/WindowsWindow.h"
+#include "../Renderer/Renderer.h"
 
 Engine::Engine()
 	: m_Context(WindowContext::Windows)
@@ -57,6 +58,8 @@ Engine::Engine(int width, int height, int pixelWidth, int pixelHeight, WindowCon
 
 	m_Scene = std::make_unique<Scene>();
 	m_Scene->Start();
+
+	Renderer::SetWindowContext(m_Window.get());
 }
 
 void Engine::Run()

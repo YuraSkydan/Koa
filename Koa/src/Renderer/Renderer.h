@@ -3,10 +3,17 @@
 #include "../Window/Color.h"
 #include "../Window/Window.h"
 
+class SpriteRenderer;
+class CircleRenderer;
+class LineRenderer;
+class PixelRenderer;
+class Mesh;
+
 class Renderer
 {
 private:
-	Window* m_WindowContext;
+	inline static Window* s_WindowContext = nullptr;
+	inline static const Camera* s_Camera = nullptr;
 
 public:
 	//void SetPixel(int x, int y, const Color& color);
@@ -27,6 +34,11 @@ public:
 	//void DrawCircle(int x, int y, int radius, const Color& color);
 	//void DrawCircle(const Vector2f& position, float radius, const Color& color);
 
-	void StartRender();
-	void EndRender();
+	static void SetWindowContext(Window* windowContext);
+	static void StartRendering(const Camera* camera);
+	static void DrawSprite(const SpriteRenderer* spriteRenderer);
+	static void DrawCircle(const CircleRenderer* circleRenderer);
+	static void DrawLine(const LineRenderer* lineRenderer);
+	static void DrawPixel(const PixelRenderer* pixelRenderer);
+	static void DrawMesh(const Mesh* mesh);
 };

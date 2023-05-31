@@ -5,11 +5,24 @@
 
 #include "Entity.h"
 
+class SpriteRenderer;
+class CircleRenderer;
+class LineRenderer;
+class PixelRenderer;
+class Mesh;
+
 class Scene
 {	
 private:
 	std::string m_Name;
 	std::vector<std::unique_ptr<Entity>> m_Entities;
+
+	//Render components
+	std::vector<const SpriteRenderer*> m_SpriteRenderers;
+	std::vector<const CircleRenderer*> m_CircleRenderers;
+	std::vector<const LineRenderer*> m_LineRenderers;
+	std::vector<const PixelRenderer*> m_PixelRenderers;
+	std::vector<const Mesh*> m_Meshes;
 
 public:
 	Scene();
