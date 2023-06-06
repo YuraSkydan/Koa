@@ -1,3 +1,3 @@
 # Koa
 
-Game Engine with custom renderer.
+3D Software Rasterizer
