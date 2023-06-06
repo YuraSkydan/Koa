@@ -113,6 +113,9 @@ RaytracerExample::RaytracerExample()
 			}
 		}
 	}
+
+	//Delete later
+	m_MaxDepth = 50;
 }
 
 void RaytracerExample::RaytracePart(float xStart, float xEnd)

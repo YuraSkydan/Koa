@@ -16,6 +16,9 @@ RenderingExample2D::RenderingExample2D()
 
 	m_Entity = m_Scene->CreateEntity();
 	m_Entity->AddComponent<SpriteRenderer>();
+
+	Entity* camera = m_Scene->CreateEntity();
+	camera->AddComponent<Camera>();
 	//m_Entity->AddComponent<LineRenderer>();
 }
 

@@ -148,66 +148,6 @@ void Scene::Render()
 			Renderer::DrawLine(renderer);
 		}
 	}
-
-	std::vector<Vector2f> square
-	{
-		{ -0.5f, -0.5f },
-		{ -0.5f,  0.5f },
-		{  0.5f, -0.5f },
-
-		{  0.5f, -0.5f },
-		{  0.5f,  0.5f },
-		{ -0.5f,  0.5f }
-	};
-
-	//GetComponent of RenderType
-	for (size_t i = 0; i < m_Entities.size(); i++)
-	{
-		if (m_Entities[i]->HasComponent<SpriteRenderer>())
-		{
-			std::vector<Vector2f> verticies(square);
-
-			SpriteRenderer* spriteRenderer = m_Entities[i]->GetComponent<SpriteRenderer>();
-			Matrix4x4f transformMatrix = m_Entities[i]->GetTransform()->GetTransformMatrix();
-			for (size_t j = 0; j < verticies.size(); j++)
-			{
-				//verticies[j] = transformMatrix * Vector3f(verticies[j]);
-				Vector4f vertex = transformMatrix * Vector4f(verticies[j], 0.0f, 1.0f);
-
-				verticies[j].x = vertex.x;
-				verticies[j].y = vertex.y;
-			}
-
-			Engine::Get().GetWindow()->DrawVerticies(std::vector<Vector2f>(verticies.begin(), verticies.begin() + 3), spriteRenderer->GetColor());
-			Engine::Get().GetWindow()->DrawVerticies(std::vector<Vector2f>(verticies.begin() + 3, verticies.end()), spriteRenderer->GetColor());
-		}
-	}
-
-	for (size_t i = 0; i < m_Entities.size(); i++)
-	{
-		if (m_Entities[i]->HasComponent<PixelRenderer>())
-		{
-			PixelRenderer* pixelRenderer = m_Entities[i]->GetComponent<PixelRenderer>();
-
-			Vector3f position = pixelRenderer->GetTransform()->GetPosition();
-			Engine::Get().GetWindow()->SetPixel(int(position.x), int(position.y), pixelRenderer->GetColor());
-		}
-	}
-
-	if (renderCamera != nullptr)
-	{
-		for (const auto& entity : m_Entities)
-		{
-			if (entity->IsActive())
-			{
-				Mesh* mesh = entity->GetComponent<Mesh>();
-				if (mesh != nullptr && mesh->IsEnabled())
-				{
-					Renderer::DrawMesh(mesh);
-				}
-			}
-		}
-	}
 }
 
 void Scene::Raytrace()

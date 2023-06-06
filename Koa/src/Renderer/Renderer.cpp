@@ -40,19 +40,19 @@ void Renderer::StartRendering(const Camera* camera)
 
 void Renderer::DrawSprite(const SpriteRenderer* spriteRenderer)
 {
-	//std::array<Vector2f, 6> verticies(squareVerticies);
-	//Matrix4x4f transformMatrix = spriteRenderer->GetTransform()->GetTransformMatrix();
-	//for (auto& vertex : verticies)
-	//{
-	//	Vector4f projection = transformMatrix * s_Camera->GetProjectionMatrix() * Vector4f(vertex, 1.0f, 1.0f);
-	//
-	//	projection /= projection.w;
-	//	vertex.x = projection.x;
-	//	vertex.y = projection.y;
-	//}
+	std::array<Vector2f, 6> verticies(squareVerticies);
+	Matrix4x4f transformMatrix = spriteRenderer->GetTransform()->GetTransformMatrix();
+	for (auto& vertex : verticies)
+	{
+		Vector4f projection = transformMatrix * s_Camera->GetProjectionMatrix() * Vector4f(vertex, 1.0f, 1.0f);
+	
+		projection /= projection.w;
+		vertex.x = projection.x;
+		vertex.y = projection.y;
+	}
 
-	//Engine::Get().GetWindow()->DrawVerticies(std::array<Vector2verticies, spriteRenderer->GetColor());
-	//Engine::Get().GetWindow()->DrawVerticies(verticies, spriteRenderer->GetColor());
+	Engine::Get().GetWindow()->DrawVerticies(std::vector<Vector2f>(verticies.begin(), verticies.begin() + 3), spriteRenderer->GetColor());
+	Engine::Get().GetWindow()->DrawVerticies(std::vector<Vector2f>(verticies.begin() + 3, verticies.end()), spriteRenderer->GetColor());
 }
 
 void Renderer::DrawCircle(const CircleRenderer* circleRenderer)
@@ -106,7 +106,7 @@ void Renderer::DrawMesh(const Mesh* mesh)
 			polygonIt++;
 			if (polygonIt == polygon.end())
 			{
-				Engine::Get().GetWindow()->DrawVerticies(polygon, Color::White);
+				Engine::Get().GetWindow()->DrawVerticies(polygon, vIndex);
 				polygonIt = polygon.begin();
 			}
 		}

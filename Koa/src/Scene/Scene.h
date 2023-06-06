@@ -5,11 +5,13 @@
 
 #include "Entity.h"
 
+#include "../Components/Mesh.h"
+
 class SpriteRenderer;
 class CircleRenderer;
 class LineRenderer;
 class PixelRenderer;
-class Mesh;
+//class Mesh;
 
 class Scene
 {	
@@ -88,7 +90,7 @@ T* Entity::AddComponent()
 
 	if (returnComponent != nullptr)
 	{
-		//m_Scene->
+		m_Scene->OnComponentAdded<T>(returnComponent);
 	}
 
 	return returnComponent;
@@ -171,6 +173,16 @@ bool Entity::HasComponentInParent() const
 
 //----------------------------------
 //Scene
-//
-//template<typename T>
-//void Scene::OnComponentAdded()
+
+template<typename T>
+void Scene::OnComponentAdded(const T* component)
+{
+	if (std::is_same<T, Mesh>::value)
+	{
+		m_Meshes.push_back((const Mesh*)component);
+	}
+	else if (std::is_same<T, SpriteRenderer>::value)
+	{
+		m_SpriteRenderers.push_back((const SpriteRenderer*)component);
+	}
+}
